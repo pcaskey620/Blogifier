@@ -1,0 +1,50 @@
+﻿@{
+    var returnUrl = Url.Action("Index", "Admin");
+}
+
+<footer class="page-footer teal">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m6 l6">
+                <h5 class="white-text">Get to Know Us</h5>
+                <p class="grey-text text-lighten-4">
+                    Jessica and Parker are a fun loving couple traveling North America in a Promaster Campervan.  Follow us to track our adventure! 
+                </p>
+            </div>
+            <div class="col s12 m6 l6 center-align">
+                <i class="fab fa-instagram foot-icon" aria-hidden="true"></i>
+                <i class="fab fa-facebook-square foot-icon" aria-hidden="true"></i>
+                <i class="fab fa-youtube foot-icon" aria-hidden="true"></i>
+                <i class="fab fa-spotify foot-icon" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row container center-align">
+                <div class="col l12 s12">
+                    Copyright &copy; @Model.Blog.Title @DateTime.Now.Year
+                    <br />
+                    Powered by <a class="brown-text text-lighten-3" href="https://github.com/blogifierdotnet/Blogifier" data-toggle="tooltip" target="_blank" title="Version - @AppSettings.Version">Blogifier</a>
+                </div>
+            </div>
+            <div class="row container center-align">
+                <div class="col l12 s12">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="~/admin">Admin</a>
+                    }
+                    else
+                    {
+                        <a href="~/account/login?ReturnUrl=@returnUrl">Login</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="~/themes/materialize/js/main.js"></script>
+@*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXy8Fay9ScYXJMR2CjLBj5c2ULGcHTZhg&callback=initMap" async defer></script>*@

@@ -190,5 +190,43 @@ namespace App.Controllers
             await _sm.SignOutAsync();
             return Redirect("~/");
         }
+
+        // PCaskey Customizations
+        [Route("aboutus")]
+        public async Task<IActionResult> AboutUs()
+        {
+            try
+            {
+                var model = new PostModel();
+                model.Blog = await _db.CustomFields.GetBlogSettings();
+
+                var viewName = $"~/Views/Themes/{model.Blog.Theme}/AboutUs.cshtml";
+
+                return View(viewName, model);
+            }
+            catch
+            {
+                return Redirect("~/error/404");
+            }
+        }
+
+        [Route("gallary")]
+        public async Task<IActionResult> Gallary()
+        {
+            try
+            {
+                var model = new PostModel();
+                model.Blog = await _db.CustomFields.GetBlogSettings();
+
+                var viewName = $"~/Views/Themes/{model.Blog.Theme}/Gallary.cshtml";
+
+                return View(viewName, model);
+            }
+            catch
+            {
+                return Redirect("~/error/404");
+            }
+        }
+
     }
 }
