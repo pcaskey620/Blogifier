@@ -1,4 +1,26 @@
-﻿/* Custom Stylesheet */
+﻿/*
+    Font Helpers
+*/
+.font-marker {
+    font-family: 'Permanent Marker', cursive;
+}
+
+.font-amatic {
+    font-family: 'Amatic SC', cursive;
+}
+
+.font-jose {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.font-major-mono {
+    font-family: 'Major Mono Display', monospace;
+}
+.font-pacifico {
+    font-family: 'Pacifico', cursive;
+}
+
+/* Custom Stylesheet */
 /**
  * Use this file to override Materialize files so you can update
  * the core Materialize files in the future
@@ -6,10 +28,10 @@
  * Made By MaterializeCSS.com
  */
 
-nav ul a,
+/*nav ul a,
 nav .brand-logo {
     color: #444;
-}
+}*/
 
 p {
     line-height: 2rem;
@@ -59,14 +81,11 @@ footer.page-footer {
     margin: 0;
 }
 
-.major-mono {
-    font-family: 'Major Mono Display', monospace;
-}
-
 .foot-icon {
     font-size: 2em;
     margin-left: .5em;
     margin-right: .5em;
+    color: white;
 }
 
 #map {

@@ -7,7 +7,16 @@
 <body class="@ViewData["bodyClass"]">
     <partial name="~/Views/Themes/Materialize/_Shared/_Header.cshtml" />
 
-    <h2>test test test yea yea yea </h2>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="card card-hoverable">
+                    <div class="card-content">
+                        @Html.Raw(Model.Post.Content)
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <partial name="~/Views/Themes/Materialize/_Shared/_Footer.cshtml" />
 </body>

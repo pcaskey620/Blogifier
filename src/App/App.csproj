@@ -28,10 +28,24 @@
  
   <ItemGroup>
     <Content Remove="wwwroot\admin\scss\**" />
+    <Content Remove="Views\Themes\Materialize\Materialize.json" />
+    <Content Remove="Views\Themes\powder\AboutUs.cshtml" />
+    <Content Remove="Views\Themes\powder\Gallary.cshtml" />
+    <Content Remove="Views\Themes\powder\List.cshtml" />
+    <Content Remove="Views\Themes\powder\Post.cshtml" />
+    <Content Remove="Views\Themes\powder\_Shared\_Footer.cshtml" />
+    <Content Remove="Views\Themes\powder\_Shared\_Head.cshtml" />
+    <Content Remove="Views\Themes\powder\_Shared\_Header.cshtml" />
     <Content Remove="wwwroot\admin\emails.json" />
     <Content Remove="wwwroot\admin\Gruntfile.js" />
     <Content Remove="wwwroot\admin\package.json" />
     <Content Remove="wwwroot\admin\package-lock.json" />
+  </ItemGroup>
+ 
+  <ItemGroup>
+    <Folder Include="wwwroot\themes\powder\css\" />
+    <Folder Include="wwwroot\themes\powder\images\" />
+    <Folder Include="wwwroot\themes\powder\js\" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

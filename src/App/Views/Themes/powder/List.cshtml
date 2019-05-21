@@ -1,0 +1,27 @@
+﻿@model ListModel
+@{
+    ViewData["bodyClass"] = "home";
+    var pgr = Model.Pager;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <partial name="~/Views/Themes/powder/_Shared/_Head.cshtml" />
+</head>
+<body class="@ViewData["bodyClass"] blue-grey">
+
+    <partial name="~/Views/Themes/powder/_Shared/_Header.cshtml" />
+
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+
+            </div>
+        </div>
+    </main>
+
+    <partial name="~/Views/Themes/powder/_Shared/_Footer.cshtml" />
+
+</body>
+</html>
