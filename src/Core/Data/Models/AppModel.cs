@@ -15,7 +15,7 @@ namespace Core.Data
     {
         [Required]
         [StringLength(160)]
-        public string Title { get; set; } = "Blog Title";
+        public string Title { get; set; } = "Parks and Wils";
         [Required]
         [StringLength(255)]
         public string Description { get; set; }
