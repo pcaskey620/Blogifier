@@ -4,20 +4,30 @@
 <head>
     <partial name="~/Views/Themes/Materialize/_Shared/_Head.cshtml" />
 </head>
-<body class="@ViewData["bodyClass"]">
+<body class="@ViewData["bodyClass"] blue-grey">
     <partial name="~/Views/Themes/Materialize/_Shared/_Header.cshtml" />
 
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="card card-hoverable">
+                    <div class="card-image">
+                        <img class="responsive-img" src="@Model.Blog.Cover" />
+                    </div>
+                    <div class="card-content">
+                        <div class="chip">
+                            <img src="~/@Model.Post.Author.Avatar" alt="@Model.Post.Author.DisplayName">
+                            @Model.Post.Author.DisplayName
+                        </div>
+                        <span>@Model.Post.Published.ToFriendlyDateString()</span>
+                    </div>
                     <div class="card-content">
                         @Html.Raw(Model.Post.Content)
                     </div>
                 </div>
             </div>
         </div>
-
+    </div>
     <partial name="~/Views/Themes/Materialize/_Shared/_Footer.cshtml" />
 </body>
 </html>
