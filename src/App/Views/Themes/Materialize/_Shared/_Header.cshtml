@@ -2,9 +2,10 @@
     <nav class="teal" role="navigation">
         <div class="nav-wrapper container">
             <a id="logo-container" href="#" class="brand-logo font-pacifico valign-wrapper">
-                <img id="pw-logo" class="" src="~/@Model.Blog.Logo" alt="@Model.Blog.Title" />
+                <img id="pw-logo-desktop" class="responsive-img hide-on-med-and-down" src="~/@Model.Blog.Logo" alt="@Model.Blog.Title" />
                 Parks and Wils
-            </a>            
+            </a>
+            <img id="pw-logo-tablet" class="responsive-img hide-on-large-only right" src="~/@Model.Blog.Logo" alt="@Model.Blog.Title" />
             <ul class="right hide-on-med-and-down ">
                 <li>
                     <a href="~/">Home</a>
@@ -37,6 +38,14 @@
                 </li>
                 <li>
                     <a href="#">Contact</a>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="s12 m4 l8">
+                            <img id="pw-logo-mobile" class="responsive-img hide-on-large-only" src="~/@Model.Blog.Logo" alt="@Model.Blog.Title" />
+                        </div>
+                    </div>
+                    
                 </li>
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>

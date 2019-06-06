@@ -101,9 +101,24 @@ blockquote {
     border-left: 5px solid #009688;
 }
 
-#pw-logo {
+#pw-logo-desktop {
     height: 32px;
-    vertical-align:middle;
+    vertical-align: middle;
+    margin-left: 1.5em;
+    margin-bottom: 10px;
+}
+
+#pw-logo-mobile {
+    height: 32px;
+    vertical-align: middle;
+    margin-left: 1.5em;
+    margin-bottom: 10px;
+    margin-top: 14px;
+}
+
+#pw-logo-tablet {
+    height: 32px;
+    vertical-align: middle;
     margin-left: 1.5em;
     margin-bottom: 10px;
 }
