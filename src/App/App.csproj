@@ -43,6 +43,10 @@
   </ItemGroup>
  
   <ItemGroup>
+    <Folder Include="wwwroot\themes\materialize\plugins\googefonts\" />
+    <Folder Include="wwwroot\themes\materialize\plugins\materialize\" />
+    <Folder Include="wwwroot\themes\materialize\plugins\fontawesome\" />
+    <Folder Include="wwwroot\themes\materialize\plugins\jquery\" />
     <Folder Include="wwwroot\themes\powder\css\" />
     <Folder Include="wwwroot\themes\powder\images\" />
     <Folder Include="wwwroot\themes\powder\js\" />
