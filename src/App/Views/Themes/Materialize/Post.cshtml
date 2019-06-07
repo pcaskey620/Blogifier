@@ -15,11 +15,18 @@
                         <img class="responsive-img" src="@Model.Blog.Cover" />
                     </div>
                     <div class="card-content">
-                        <div class="chip">
-                            <img src="~/@Model.Post.Author.Avatar" alt="@Model.Post.Author.DisplayName">
-                            @Model.Post.Author.DisplayName
+                        <div class="row">
+                            <div class="col s12 m8 l8">
+                                <h3 class="font-shadows-into-light">@Model.Post.Title</h3>
+                            </div>
+                            <div class="col s12 m4 l4">
+                                <div class="chip">
+                                    <img src="~/@Model.Post.Author.Avatar" alt="@Model.Post.Author.DisplayName">
+                                    @Model.Post.Author.DisplayName
+                                </div>
+                                <span>@Model.Post.Published.ToFriendlyDateString()</span>
+                            </div>
                         </div>
-                        <span>@Model.Post.Published.ToFriendlyDateString()</span>
                     </div>
                     <div class="card-content">
                         @Html.Raw(Model.Post.Content)

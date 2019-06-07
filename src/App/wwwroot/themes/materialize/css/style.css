@@ -16,8 +16,13 @@
 .font-major-mono {
     font-family: 'Major Mono Display', monospace;
 }
-.font-pacifico {
-    font-family: 'Pacifico', cursive;
+
+.font-shadows-into-light {
+    font-family: 'Shadows Into Light', cursive;
+}
+
+.font-raleway {
+    font-family: 'Raleway', sans-serif, cursive;
 }
 
 /* Custom Stylesheet */
