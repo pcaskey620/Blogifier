@@ -18,7 +18,7 @@
 
         <div class="container">
             <div class="row">
-                <div class="col s12 m8 l8">
+                <div class="col s12 m12 l12">
                     @if (Model.Posts != null)
                     {
                         foreach (var item in Model.Posts)
@@ -27,15 +27,22 @@
                     <article class="card hoverable">
                         <div class="card-image">
                             <img src="~/@img" alt="@item.Title">
-                            <span class="card-title font-shadows-into-light">@item.Title</span>
+                            @*<span class="card-title font-shadows-into-light">@item.Title</span>*@
                         </div>
                         <div class="card-content">
-                            <div class="chip">
-                                <img src="~/@item.Author.Avatar" alt="@item.Author.DisplayName">
-                                @item.Author.DisplayName
+                            <div class="row">
+                                <div class="col s12 m6 l6">
+                                    <span class="card-title font-shadows-into-light">@item.Title</span>
+                                </div>
+                                <div class="col s12 m6 l6">
+                                    <div class="chip">
+                                        <img src="~/@item.Author.Avatar" alt="@item.Author.DisplayName">
+                                        @item.Author.DisplayName
+                                    </div>
+                                    <span>@item.Published.ToFriendlyDateString()</span>
+                                </div>
                             </div>
-                            <span>@item.Published.ToFriendlyDateString()</span>
-                            <div>
+                            <div class="font-raleway">
                                 @Html.Raw(Markdig.Markdown.ToHtml(item.Description))
                             </div>
                         </div>

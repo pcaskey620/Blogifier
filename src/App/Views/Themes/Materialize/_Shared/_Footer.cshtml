@@ -12,13 +12,13 @@
                 </p>
             </div>
             <div class="col s12 m6 l6 center-align">
-                <h4><i class="fas fa-share-alt"> </i> Follow Us</h4>
-                <a href="https://www.instagram.com/parks.and.wils/" target="_blank">
+                <h4><i class="fas fa-share-alt"> </i> Follow Us<i class="fab fa-instagram" aria-hidden="true"></i></h4>
+                @*<a href="https://www.instagram.com/parks.and.wils/" target="_blank">
                     <i class="fab fa-instagram foot-icon" aria-hidden="true"></i>
-                </a>
-                <i class="fab fa-facebook-square foot-icon" aria-hidden="true"></i>
+                </a>*@
+                @*<i class="fab fa-facebook-square foot-icon" aria-hidden="true"></i>
                 <i class="fab fa-youtube foot-icon" aria-hidden="true"></i>
-                <i class="fab fa-spotify foot-icon" aria-hidden="true"></i>
+                <i class="fab fa-spotify foot-icon" aria-hidden="true"></i>*@
             </div>
         </div>
     </div>
@@ -35,11 +35,11 @@
                 <div class="col l12 s12">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a href="~/admin">Admin</a>
+                        <a href="~/admin"><i class="fas fa-user white-text"></i></a>
                     }
                     else
                     {
-                        <a href="~/account/login?ReturnUrl=@returnUrl">Login</a>
+                        <a href="~/account/login?ReturnUrl=@returnUrl"><i class="fas fa-user white-text"></i></a>
                     }
                 </div>
             </div>
