@@ -30,6 +30,7 @@
     <Content Remove="wwwroot\admin\scss\**" />
     <Content Remove="Views\Themes\Materialize\ListParallax.cshtml" />
     <Content Remove="Views\Themes\Materialize\Materialize.json" />
+    <Content Remove="Views\Themes\Materialize\Route.cshtml" />
     <Content Remove="Views\Themes\Materialize\_Shared\Van.cshtml" />
     <Content Remove="Views\Themes\powder\AboutUs.cshtml" />
     <Content Remove="Views\Themes\powder\Gallary.cshtml" />

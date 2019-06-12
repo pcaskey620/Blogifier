@@ -1,0 +1,45 @@
+﻿@model PostModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <partial name="~/Views/Themes/Materialize/_Shared/_Head.cshtml" />
+</head>
+<body class="blue-grey">
+
+    <partial name="~/Views/Themes/Materialize/_Shared/_Header.cshtml" />
+
+    <main>
+        <div class="section white">
+            <div class="row container center-align">
+                <h5 class="font-raleway"><i class="fas fa-map-marked-alt"></i> Current Location</h5>
+                <div class="col s12 m12 l8 offset-l2">
+                    <div id="map" style="margin-left: auto; margin-right: auto; display: block;"></div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function initMap() {
+                var myLatLng = { lat: 43.7630, lng: -110.7319 };
+
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 8,
+                    center: myLatLng
+                });
+
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    title: 'Jenny Lake, Grand Teton National Park'
+                });
+            }
+        </script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeYeSBgvQ0laAD-8l8OgQRSnFbcHdeRpo&callback=initMap">
+        </script>
+    </main>
+
+    <partial name="~/Views/Themes/Materialize/_Shared/_Footer.cshtml" />
+
+</body>
+</html>
