@@ -142,7 +142,7 @@ blockquote {
     margin-bottom: 1em;
 }
 
-.post-content {
+#post-content {
     padding-top: 0px;
 }
 
@@ -151,7 +151,7 @@ blockquote {
     height: auto
 }
 
-.post-card-content {
+#post-card-content {
     margin-bottom: 0px; 
     padding-bottom: 0px;
 }
