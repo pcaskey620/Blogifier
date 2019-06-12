@@ -19,7 +19,7 @@ namespace App.Controllers
         IFeedService _ss;
         SignInManager<AppUser> _sm;
         private readonly ICompositeViewEngine _viewEngine;
-        static readonly string _listView = "~/Views/Themes/{0}/List.cshtml";
+        static readonly string _listView = "~/Views/Themes/{0}/ListParallax.cshtml";
 
         public BlogController(IDataService db, IFeedService ss, SignInManager<AppUser> sm, ICompositeViewEngine viewEngine)
         {

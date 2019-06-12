@@ -1,0 +1,50 @@
+﻿@model ListModel
+@{
+    ViewData["bodyClass"] = "home";
+    var pgr = Model.Pager;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <partial name="~/Views/Themes/Materialize/_Shared/_Head.cshtml" />
+</head>
+<body class="@ViewData["bodyClass"] blue-grey">
+
+    <partial name="~/Views/Themes/Materialize/_Shared/_Header.cshtml" />
+
+    <main>
+        @if (Model.Posts != null)
+        {
+            foreach (var item in Model.Posts)
+            {
+                var img = string.IsNullOrWhiteSpace(item.Cover) ? Model.Blog.Cover : item.Cover;
+                <div>
+                    <a href="~/posts/@item.Slug" title="@item.Title" class="white-text">
+                        <div class="parallax-container">
+                            <div class="parallax">
+                                <img class="responsive-img" src="~/@img" alt="@item.Title" />
+                            </div>
+                        </div>
+                        <div class="section">
+                            <div class="row container center-align">
+                                <div class="col s12 m12 l12">
+                                    <h4 class="font-shadows-into-light white-text">
+                                        @item.Title
+                                    </h4>
+                                    <span class="white-text text-darken-3 lighten-3 font-raleway">@item.Published.ToFriendlyDateString()</span>
+                                    <span class="white-text text-darken-3 lighten-3 font-raleway">
+                                        @Html.Raw(Markdig.Markdown.ToHtml(item.Description))
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+    </main>
+
+    <partial name="~/Views/Themes/Materialize/_Shared/_Footer.cshtml" />
+
+</body>
+</html>
