@@ -24,7 +24,7 @@ namespace Core.Data
         public Task<BlogItem> GetBlogSettings()
         {
             var blog = new BlogItem();
-            CustomField title, desc, items, cover, logo, theme, culture;
+            CustomField title, desc, items, cover, logo, theme, culture, latitude, longitude;
 
             title = _db.CustomFields.Where(f => f.AuthorId == 0 && f.Name == Constants.BlogTitle).FirstOrDefault();
             desc = _db.CustomFields.Where(f => f.AuthorId == 0 && f.Name == Constants.BlogDescription).FirstOrDefault();
@@ -33,6 +33,8 @@ namespace Core.Data
             logo = _db.CustomFields.Where(f => f.AuthorId == 0 && f.Name == Constants.BlogLogo).FirstOrDefault();
             theme = _db.CustomFields.Where(f => f.AuthorId == 0 && f.Name == Constants.BlogTheme).FirstOrDefault();
             culture = _db.CustomFields.Where(f => f.AuthorId == 0 && f.Name == Constants.Culture).FirstOrDefault();
+            latitude = _db.CustomFields.Where(f => f.AuthorId == 0 && f.Name == Constants.Latitude).FirstOrDefault();
+            longitude = _db.CustomFields.Where(f => f.AuthorId == 0 && f.Name == Constants.Longitude).FirstOrDefault();
 
             blog.Title = title == null ? "Blog Title" : title.Content;
             blog.Description = desc == null ? "Short blog description" : desc.Content;
@@ -41,6 +43,9 @@ namespace Core.Data
             blog.Logo = logo == null ? "lib/img/logo-white.png" : logo.Content;
             blog.Theme = theme == null ? "Standard" : theme.Content;
             blog.Culture = culture == null ? "en-US" : culture.Content;
+            blog.Latitude = latitude == null ? 39.7392 : double.Parse(latitude.Content);
+            blog.Longitude = longitude == null ? 104.9903 : double.Parse(longitude.Content);
+            
 
             return Task.FromResult(blog);
         }
@@ -53,6 +58,8 @@ namespace Core.Data
             var cover = _db.CustomFields.Where(f => f.AuthorId == 0 && f.Name == Constants.BlogCover).FirstOrDefault();
             var logo = _db.CustomFields.Where(f => f.AuthorId == 0 && f.Name == Constants.BlogLogo).FirstOrDefault();
             var culture = _db.CustomFields.Where(f => f.AuthorId == 0 && f.Name == Constants.Culture).FirstOrDefault();
+            var latitude = _db.CustomFields.Where(f => f.AuthorId == 0 && f.Name == Constants.Latitude).FirstOrDefault();
+            var longitude = _db.CustomFields.Where(f => f.AuthorId == 0 && f.Name == Constants.Longitude).FirstOrDefault();
 
             if (title == null) _db.CustomFields.Add(new CustomField { AuthorId = 0, Name = Constants.BlogTitle, Content = blog.Title });
             else title.Content = blog.Title;
@@ -71,6 +78,12 @@ namespace Core.Data
 
             if (culture == null) _db.CustomFields.Add(new CustomField { AuthorId = 0, Name = Constants.Culture, Content = blog.Culture });
             else culture.Content = blog.Culture;
+
+            if (longitude == null) _db.CustomFields.Add(new CustomField { AuthorId = 0, Name = Constants.Longitude, Content = blog.Longitude.ToString() });
+            else longitude.Content = blog.Longitude.ToString();
+
+            if (latitude == null) _db.CustomFields.Add(new CustomField { AuthorId = 0, Name = Constants.Latitude, Content = blog.Latitude.ToString() });
+            else latitude.Content = blog.Latitude.ToString();
 
             await _db.SaveChangesAsync();
         }

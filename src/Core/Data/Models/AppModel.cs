@@ -33,5 +33,9 @@ namespace Core.Data
         [Required]
         [StringLength(15)]
         public string Culture { get; set; }
+        [Display(Name = "Latitude")]
+        public double Latitude { get; set; }
+        [Display(Name = "Longitude")]
+        public double Longitude { get; set; }
     }
 }

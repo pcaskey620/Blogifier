@@ -58,6 +58,17 @@
                     <label class="form-group-label">@Localizer["language"]</label>
                     <select class="form-control" asp-for="BlogItem.Culture" asp-items="cultureItems"></select>
                 </div>
+
+                <div class="form-group">
+                    <label class="form-group-label">@Localizer["longitude"]</label>
+                    <input type="text" asp-for="BlogItem.Longitude" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-group-label">@Localizer["latitude"]</label>
+                    <input type="text" asp-for="BlogItem.Latitude" class="form-control" />
+                </div>
+
                 <button type="submit" class="btn btn-primary btn-main">@Localizer["save"]</button>
             </div>
         </form>

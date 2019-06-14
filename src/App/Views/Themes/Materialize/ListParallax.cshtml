@@ -54,7 +54,7 @@
         
         <script>
             function initMap() {
-                var myLatLng = { lat: 43.7630, lng: -110.7319 };
+                var myLatLng = { lat: @Model.Blog.Latitude, lng: @Model.Blog.Longitude };
 
                 var map = new google.maps.Map(document.getElementById('map'), {
                     zoom: 8,
@@ -63,8 +63,8 @@
 
                 var marker = new google.maps.Marker({
                     position: myLatLng,
-                    map: map,
-                    title: 'Jenny Lake, Grand Teton National Park'
+                    map: map
+                    //,title: 'Jenny Lake, Grand Teton National Park'
                 });
             }
         </script>

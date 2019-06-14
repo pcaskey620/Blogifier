@@ -16,6 +16,10 @@
         public static string BlogLogo = "blog-logo";
         public static string BlogCover = "blog-cover";
         public static string Culture = "culture";
+        public static string Latitude = "location-latitude"; //43.7630;
+        public static string Longitude = "location-longitude"; //-110.7319;
+
+
 
         public static string ThemeEditReturnUrl = "~/admin/settings/theme";
     }

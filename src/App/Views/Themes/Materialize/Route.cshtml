@@ -12,7 +12,7 @@
     <main>
         <div class="section white">
             <div class="row container center-align">
-                <h5 class="font-raleway"><i class="fas fa-map-marked-alt"></i> Current Location</h5>
+                <h5 class="font-shadows-into-light"><i class="fas fa-map-marked-alt"></i> Current Location</h5>
                 <div class="col s12 m12 l8 offset-l2">
                     <div id="map" style="margin-left: auto; margin-right: auto; display: block;"></div>
                 </div>
@@ -20,7 +20,8 @@
         </div>
         <script>
             function initMap() {
-                var myLatLng = { lat: 43.7630, lng: -110.7319 };
+                
+                var myLatLng = { lat: @Model.Blog.Latitude, lng: @Model.Blog.Longitude };
 
                 var map = new google.maps.Map(document.getElementById('map'), {
                     zoom: 8,
