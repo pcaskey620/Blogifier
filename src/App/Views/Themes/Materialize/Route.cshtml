@@ -12,15 +12,65 @@
     <main>
         <div class="section white">
             <div class="row container center-align">
-                <h5 class="font-shadows-into-light"><i class="fas fa-map-marked-alt"></i> Current Location</h5>
+                <h4 class="font-amatic">Our Route</h4>
+                <h5 class="font-raleway"><i class="fas fa-map-marked-alt"></i> Current Location</h5>
                 <div class="col s12 m12 l8 offset-l2">
                     <div id="map" style="margin-left: auto; margin-right: auto; display: block;"></div>
                 </div>
             </div>
         </div>
+
+        <div class="section white-text">
+            <div class="row container center-align">
+                <h5 class="font-shadows-into-light">June</h5>
+                <ul class="font-raleway">
+                    <li>Yellowstone National Park</li>
+                    <li>Jackson, Wyoming</li>
+                    <li>Grand Teton National Park</li>
+                    <li>Glacier National Park</li>
+                    <li>Banff National Park</li>
+                    <li>Jasper National Park</li>
+                    <li>Yukon Territory</li>
+                </ul>
+            </div>
+        </div>
+        <div class="section white">
+            <div class="row container center-align">
+                <h5 class="font-shadows-into-light">July</h5>
+                <ul class="font-raleway">
+                    <li>Fairbanks, Alaska</li>
+                    <li>Denali National Park</li>
+                    <li>Talkeetna, Alaska</li>
+                    <li>Anchorage, Alaska</li>
+                    <li>Seward, Alaska</li>
+                    <li>Homer, Alaska</li>
+                    <li>Whistler, British Columbia</li>
+                    <li>Victoria, British Columbia</li>
+                </ul>
+            </div>
+        </div>
+        <div class="section white-text">
+            <div class="row container center-align">
+                <h5 class="font-shadows-into-light">August</h5>
+                <ul class="font-raleway">
+                    <li>Seattle, Washington</li>
+                    <li>Cascades</li>
+                    <li>Olympic National Park</li>
+                    <li>Mt. Rainier National Park</li>
+                    <li>Portland, Oregon</li>
+                    <li>Mt. Hood National Forest</li>
+                    <li>Bend, Oregon</li>
+                    <li>Crater Lake National Park</li>
+                    <li>Lake Tahoe</li>
+                    <li>Yosemite National Park</li>
+                    <li>Lake Powell</li>
+                </ul>
+            </div>
+        </div>
+
         <script>
             function initMap() {
-                
+
                 var myLatLng = { lat: @Model.Blog.Latitude, lng: @Model.Blog.Longitude };
 
                 var map = new google.maps.Map(document.getElementById('map'), {
