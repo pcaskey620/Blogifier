@@ -228,6 +228,24 @@ namespace App.Controllers
             }
         }
 
+        [Route("Collections")]
+        public async Task<IActionResult> Collections()
+        {
+            try
+            {
+                var model = new PostModel();
+                model.Blog = await _db.CustomFields.GetBlogSettings();
+
+                var viewName = $"~/Views/Themes/{model.Blog.Theme}/GallaryCollections.cshtml";
+
+                return View(viewName, model);
+            }
+            catch
+            {
+                return Redirect("~/error/404");
+            }
+        }
+
         [Route("van")]
         public async Task<IActionResult> Van()
         {
