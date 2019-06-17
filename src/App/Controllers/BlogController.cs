@@ -210,15 +210,15 @@ namespace App.Controllers
             }
         }
 
-        [Route("gallary")]
-        public async Task<IActionResult> Gallary()
+        [Route("gallery")]
+        public async Task<IActionResult> Gallery()
         {
             try
             {
                 var model = new PostModel();
                 model.Blog = await _db.CustomFields.GetBlogSettings();
 
-                var viewName = $"~/Views/Themes/{model.Blog.Theme}/Gallary.cshtml";
+                var viewName = $"~/Views/Themes/{model.Blog.Theme}/Gallery.cshtml";
 
                 return View(viewName, model);
             }
@@ -236,7 +236,7 @@ namespace App.Controllers
                 var model = new PostModel();
                 model.Blog = await _db.CustomFields.GetBlogSettings();
 
-                var viewName = $"~/Views/Themes/{model.Blog.Theme}/GallaryCollections.cshtml";
+                var viewName = $"~/Views/Themes/{model.Blog.Theme}/GalleryCollections.cshtml";
 
                 return View(viewName, model);
             }
