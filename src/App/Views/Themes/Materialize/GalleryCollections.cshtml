@@ -1,4 +1,4 @@
-﻿@model PostModel
+﻿@model GalleriesModel
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,55 +12,32 @@
 
     <main>
         <div class="container">
-            <div id="lightgallery" class="row container">
-                <a class="col s6 m3 l3" href="~/themes/materialize/images/Jess.jpg">
-                    <img class="responsive-img" src="~/themes/materialize/images/Jess.jpg" data-ng-src="~/themes/materialize/images/Jess.jpg" />
-                </a>
-                <a class="col s6 m3 l3" href="~/themes/materialize/images/Parker.JPG">
-                    <img class="responsive-img" src="~/themes/materialize/images/Parker.jpg" />
-                </a>
-                <a class="col s6 m3 l3" href="~/themes/materialize/images/van3.jpg">
-                    <img class="responsive-img" src="~/themes/materialize/images/van3.jpg" />
-                </a>
-                <a class="col s6 m3 l3" href="~/themes/materialize/images/van6.jpg">
-                    <img class="responsive-img" src="~/themes/materialize/images/van6.jpg" />
-                </a>
-                <a class="col s6 m3 l3" href="~/themes/materialize/images/Jess.jpg">
-                    <img class="responsive-img" src="~/themes/materialize/images/Jess.jpg" data-ng-src="~/themes/materialize/images/Jess.jpg" />
-                </a>
-                <a class="col s6 m3 l3" href="~/themes/materialize/images/Parker.JPG">
-                    <img class="responsive-img" src="~/themes/materialize/images/Parker.jpg" />
-                </a>
-                <a class="col s6 m3 l3" href="~/themes/materialize/images/van3.jpg">
-                    <img class="responsive-img" src="~/themes/materialize/images/van3.jpg" />
-                </a>
-                <a class="col s6 m3 l3" href="~/themes/materialize/images/van6.jpg">
-                    <img class="responsive-img" src="~/themes/materialize/images/van6.jpg" />
-                </a>
-                <a class="col s6 m3 l3" href="~/themes/materialize/images/Jess.jpg">
-                    <img class="responsive-img" src="~/themes/materialize/images/Jess.jpg" data-ng-src="~/themes/materialize/images/Jess.jpg" />
-                </a>
-                <a class="col s6 m3 l3" href="~/themes/materialize/images/Parker.JPG">
-                    <img class="responsive-img" src="~/themes/materialize/images/Parker.jpg" />
-                </a>
-                <a class="col s6 m3 l3" href="~/themes/materialize/images/van3.jpg">
-                    <img class="responsive-img" src="~/themes/materialize/images/van3.jpg" />
-                </a>
-                <a class="col s6 m3 l3" href="~/themes/materialize/images/van6.jpg">
-                    <img class="responsive-img" src="~/themes/materialize/images/van6.jpg" />
-                </a>
+            <div class="row">
+                <div class="col s12 m12 l12 center-align">
+                    <h4 class="font-amatic white-text">Our Photo Galleries</h4>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (GalleryModel gallery in Model.Galleries)
+                {
+                <div class="col s12 m4 l3">
+                    <a title="@gallery.Title" href="~/collections/@gallery.Slug">
+                        <div class="card card-hoverable">
+                            <div class="card-image">
+                                <img src="~/themes/materialize/images/Jess.jpg">
+                            </div>
+                        </div>
+                        <div class="center-align">
+                            <h6 class="font-shadows-into-light white-text">@gallery.Title</h6>
+                        </div>
+                    </a>
+                </div>
+                }
             </div>
         </div>
     </main>
 
     <partial name="~/Views/Themes/Materialize/_Shared/_Footer.cshtml" />
-    <script src="~/themes/materialize/plugins/lightgallary/js/lightgallery.js"></script>
-    <script src="~/themes/materialize/plugins/lightgallary/js/lg-fullscreen.js"></script>
-    <script src="~/themes/materialize//plugins/lightgallary/js/lg-thumbnail.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#lightgallery").lightGallery();
-        });
-    </script>
+    
 </body>
 </html>

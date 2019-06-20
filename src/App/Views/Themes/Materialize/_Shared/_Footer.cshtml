@@ -8,7 +8,7 @@
             <div class="col s12 m6 l6">
                 <h5 class="white-text font-amatic">Get to Know Us</h5>
                 <p class="grey-text text-lighten-4 font-jose">
-                    Jessica and Parker are a fun loving couple traveling North America in a Promaster Campervan.  Follow us to track our adventure! 
+                    Jessica and Parker are an adventure loving couple traveling North America in a Promaster Campervan.  Follow us to track our journey! 
                 </p>
             </div>
             <div class="col s12 m6 l6 center-align">
@@ -28,18 +28,18 @@
         <div class="container">
             <div class="row container center-align">
                 <div class="col l12 s12">
-                    Copyright &copy; @Model.Blog.Title @DateTime.Now.Year
+                    Copyright &copy; Parks & Wils @DateTime.Now.Year
                 </div>
             </div>
             <div class="row container center-align">
                 <div class="col l12 s12">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a href="~/admin"><i class="fas fa-user white-text"></i></a>
+                        <a href="~/admin"><img class="footer-logo responsive-img" src="~/themes/materialize/images/parksAndWilsLogoSmall.png" alt="admin login" /></a>
                     }
                     else
                     {
-                        <a href="~/account/login?ReturnUrl=@returnUrl"><i class="fas fa-user white-text"></i></a>
+                        <a href="~/account/login?ReturnUrl=@returnUrl"><img class="footer-logo  responsive-img" src="~/themes/materialize/images/parksAndWilsLogoSmall.png" alt="admin login" /></a>
                     }
                 </div>
             </div>

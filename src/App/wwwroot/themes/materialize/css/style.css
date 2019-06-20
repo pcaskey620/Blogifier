@@ -161,3 +161,7 @@ blockquote {
     height: 100%;
     min-height:200px;
 }
+
+.footer-logo {
+    max-height: 24px;
+}

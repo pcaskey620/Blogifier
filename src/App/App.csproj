@@ -28,6 +28,7 @@
  
   <ItemGroup>
     <Content Remove="wwwroot\admin\scss\**" />
+    <Content Remove="Views\Themes\Materialize\GalleryCollection.cshtml" />
     <Content Remove="Views\Themes\Materialize\GalleryCollections.cshtml" />
     <Content Remove="Views\Themes\Materialize\ListParallax.cshtml" />
     <Content Remove="Views\Themes\Materialize\Materialize.json" />

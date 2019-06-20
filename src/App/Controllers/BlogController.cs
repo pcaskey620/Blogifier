@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml;
+using System.IO;
 
 namespace App.Controllers
 {
@@ -228,14 +229,34 @@ namespace App.Controllers
             }
         }
 
-        [Route("Collections")]
+        [Route("collections")]
         public async Task<IActionResult> Collections()
         {
             try
             {
-                var model = new PostModel();
+                var model = new GalleriesModel();
                 model.Blog = await _db.CustomFields.GetBlogSettings();
 
+
+                var directoryPath = Directory.GetCurrentDirectory() + "\\wwwroot\\data\\gallery";
+                var directories = Directory.GetDirectories(directoryPath);
+                var galleries = new List<GalleryModel>();
+
+                foreach (string dirPath in directories)
+                {
+                    string directoryName = new DirectoryInfo(dirPath).Name;
+                    var gallery = new GalleryModel
+                    {
+                        Directory = dirPath,
+                        Title = directoryName,
+                        Blog = model.Blog,
+                        Slug = directoryName.Replace(" ", "-")
+                    };
+
+                    galleries.Add(gallery);
+                }
+
+                model.Galleries = galleries;
                 var viewName = $"~/Views/Themes/{model.Blog.Theme}/GalleryCollections.cshtml";
 
                 return View(viewName, model);
@@ -246,7 +267,51 @@ namespace App.Controllers
             }
         }
 
-        [Route("van")]
+        [Route("collections/{slug}")]
+        public async Task<IActionResult> Collection(string slug)
+        {
+            try
+            {
+                var directoryPath = $"{Directory.GetCurrentDirectory()}\\wwwroot\\data\\gallery\\{slug.Replace("-", " ")}";
+                var virtualPath = $"/data/gallery/{slug.Replace("-", " ")}/";
+
+                var blog = await _db.CustomFields.GetBlogSettings();
+
+                var model = new GalleryModel()
+                {
+                    Blog = blog,
+                    Directory = directoryPath,
+                    Slug = slug,
+                    Title = slug.Replace("-", " ")
+                };
+                model.Blog = blog;
+
+                var images = new List<GalleryImageModel>();
+
+                var files = Directory.GetFiles(directoryPath);
+                
+                foreach (string file in files)
+                {
+                    var image = new GalleryImageModel()
+                    {
+                        Name = Path.GetFileName(file),
+                        Path = virtualPath + Path.GetFileName(file)
+                    };
+                    images.Add(image);
+                }
+                model.GalleryImages = images;
+
+                var viewName = $"~/Views/Themes/{model.Blog.Theme}/GalleryCollection.cshtml";
+
+                return View(viewName, model);
+            }
+            catch
+            {
+                return Redirect("~/error/404");
+            }
+        }
+
+        [Route("Van")]
         public async Task<IActionResult> Van()
         {
             try
