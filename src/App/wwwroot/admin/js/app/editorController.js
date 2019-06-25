@@ -142,6 +142,7 @@ function getEditor() {
 var _editor = {};
 
 function openFileMgr(editor) {
+    debugger;
     _editor = editor;
     fileManagerController.open(insertImageCallback);
 }

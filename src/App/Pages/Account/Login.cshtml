@@ -4,12 +4,22 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Pages/Account/_Layout.cshtml";
 }
+<style>
+    .btn-primary {
+        background-color: #00acc1;
+        border-color: #607d8b;
+    }
+    .btn-primary:hover {
+        background-color: #00acc1;
+        border-color: #607d8b;
+    }
+</style>
 <div class="form-login">
     @if (!User.Identity.IsAuthenticated)
     {
     <form asp-route-returnurl="@ViewData["ReturnUrl"]" class="form" method="POST">
-        <div class="bf-account-header">
-            <h1>Welcome!</h1>
+        <div class="bf-account-header text-center">
+            <h1>Parks & Wils <br />Admin Portal</h1>
             <p>You can sign in or go <a href="~/">back to blog</a>.</p>
         </div>
         <div asp-validation-summary="All" class="text-danger"></div>

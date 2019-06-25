@@ -1,0 +1,79 @@
+﻿@page
+@model App.Pages.Admin.Gallery.IndexModel
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    .bf-settings-sidebar li {
+        font-size: .875rem;
+        text-transform: uppercase;
+        font-weight: 500;
+        display: block;
+        padding: .5rem 0;
+    }
+</style>
+<div class="bf-main">
+    <div class="bf-sidebar d-lg-block" style="display: block;">
+        <div class="bf-settings-sidebar">
+            <ul class="bf-settings-sidebar-nav" style="text-align: center;">
+                <li>Galleries</li>
+                <li>
+                    <button class="btn btn-primary btn-sm btn-main" type="button" title="Add Collection" onclick="return openAddCollection();">Add Collection</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="bf-body">
+        <div id="galleryList" class=" bf-posts-grid d-flex" aria-label="collections">
+            @*List populated by galleryController.js*@
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="dlgCollection" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="hdrSettings">Add Collection</h4>
+                <button type="button" class="close ml-2" title="Close" data-placement="bottom" data-tooltip data-dismiss="modal" aria-label="@Localizer["close"]">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-body">
+                    <form id="frmCollection" method="post">
+                        <div class="bf-content bf-content-boxed bf-settings">
+                            <div class="form-group">
+                                <label class="form-group-label">Title</label>
+                                <input type="text" id="txtTitle" name="txtTitle" value="" class="form-control" required autofocus />
+                            </div>
+                        </div>
+                        <button type="button" onclick="return galleryController.add();" class="btn btn-primary btn-main">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/admin/js/lib/jquery.validate.min.js"></script>
+    <script src="~/admin/js/lib/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/admin/js/app/galleryController.js"></script>
+    <script>
+        var openAddCollection = function () {
+            $('#frmCollection').validate().resetForm();
+            $('#dlgCollection').modal();
+            return false;
+        }
+    $('#frmCollection').validate({
+        rules: {
+            txtTitle: {
+                required: true
+            }
+        }
+    });
+    galleryController.load(1);
+    </script>
+}

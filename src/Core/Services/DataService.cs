@@ -12,6 +12,8 @@ namespace Core.Services
         ICustomFieldRepository CustomFields { get; }
         INewsletterRepository Newsletters { get; }
 
+        IGalleryRepository Galleries { get; }
+
         int Complete();
     }
 
@@ -29,6 +31,7 @@ namespace Core.Services
             HtmlWidgets = new HtmlWidgetRepository(_db);
             CustomFields = new CustomFieldRepository(_db);
             Newsletters = new NewsletterRepository(_db);
+            Galleries = new GalleryRepository(_db);
         }
 
         public IPostRepository BlogPosts { get; private set; }
@@ -37,6 +40,8 @@ namespace Core.Services
         public IHtmlWidgetRepository HtmlWidgets { get; private set; }
         public ICustomFieldRepository CustomFields { get; private set; }
         public INewsletterRepository Newsletters { get; private set; }
+
+        public IGalleryRepository Galleries { get; private set; }
 
         public int Complete()
         {

@@ -50,7 +50,9 @@
                 img = $"{Url.Content("~/")}{img}";
                 <div class="post-grid-col">
                     <div class="post-grid-item">
-                        <a class="item-link" href="~/admin/posts/edit?id=@post.Id" style="background-image:url(@img);"><div class="item-title mt-auto">@post.Title</div></a>
+                        <a class="item-link" href="~/admin/posts/edit?id=@post.Id" style="background-image:url(@img);">
+                            <div class="item-title mt-auto">@post.Title</div>
+                        </a>
                         <div class="item-info d-flex align-items-center">
                             <span class="item-date mr-auto">@dt</span>
 

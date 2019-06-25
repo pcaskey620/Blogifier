@@ -46,7 +46,8 @@ namespace Core.Services
 
         public async Task<IEnumerable<Notification>> GetNotifications(int authorId)
         {
-            if(SystemClock.Now() >= _checkPoint)
+            return null;
+            /*if(SystemClock.Now() >= _checkPoint)
             {
                 _checkPoint = SystemClock.Now().AddMinutes(30);
                 var result = await _web.CheckForLatestRelease();
@@ -89,6 +90,8 @@ namespace Core.Services
             }
 
             return await Task.FromResult(notes);
+            */
+
         }
     }
 }

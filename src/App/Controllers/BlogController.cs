@@ -1,4 +1,5 @@
 ﻿using Core.Data;
+using Core.Data.Models;
 using Core.Helpers;
 using Core.Services;
 using Markdig;
@@ -240,17 +241,19 @@ namespace App.Controllers
 
                 var directoryPath = Directory.GetCurrentDirectory() + "\\wwwroot\\data\\gallery";
                 var directories = Directory.GetDirectories(directoryPath);
-                var galleries = new List<GalleryModel>();
+                var galleries = new List<Gallery>();
 
                 foreach (string dirPath in directories)
                 {
-                    string directoryName = new DirectoryInfo(dirPath).Name;
-                    var gallery = new GalleryModel
+                    string directoryName = new DirectoryInfo(dirPath).Name;                   
+                    string coverImagePath = $"/data/gallery/{directoryName}/cover.jpg";
+                    var gallery = new Gallery
                     {
                         Directory = dirPath,
                         Title = directoryName,
-                        Blog = model.Blog,
-                        Slug = directoryName.Replace(" ", "-")
+                        //Blog = model.Blog,
+                        Slug = directoryName.Replace(" ", "-"),
+                        CoverImagePath = coverImagePath
                     };
 
                     galleries.Add(gallery);
@@ -277,22 +280,22 @@ namespace App.Controllers
 
                 var blog = await _db.CustomFields.GetBlogSettings();
 
-                var model = new GalleryModel()
+                var model = new Gallery()
                 {
-                    Blog = blog,
+                    //Blog = blog,
                     Directory = directoryPath,
                     Slug = slug,
                     Title = slug.Replace("-", " ")
                 };
-                model.Blog = blog;
+                //model.Blog = blog;
 
-                var images = new List<GalleryImageModel>();
+                var images = new List<GalleryImage>();
 
                 var files = Directory.GetFiles(directoryPath);
                 
                 foreach (string file in files)
                 {
-                    var image = new GalleryImageModel()
+                    var image = new GalleryImage()
                     {
                         Name = Path.GetFileName(file),
                         Path = virtualPath + Path.GetFileName(file)
@@ -301,7 +304,8 @@ namespace App.Controllers
                 }
                 model.GalleryImages = images;
 
-                var viewName = $"~/Views/Themes/{model.Blog.Theme}/GalleryCollection.cshtml";
+                //var viewName = $"~/Views/Themes/{model.Blog.Theme}/GalleryCollection.cshtml";
+                var viewName = $"~/Views/Themes/Materialize/GalleryCollection.cshtml";
 
                 return View(viewName, model);
             }

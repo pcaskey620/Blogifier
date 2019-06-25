@@ -16,6 +16,8 @@ namespace Core.Data
         public DbSet<HtmlWidget> HtmlWidgets { get; set; }
         public DbSet<Newsletter> Newsletters { get; set; }
 
+        public DbSet<Gallery> Gallery { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

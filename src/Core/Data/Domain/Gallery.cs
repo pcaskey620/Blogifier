@@ -5,30 +5,33 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Core.Data
 {
-    public class GalleriesModel
+    public class Gallery
     {
-        public BlogItem Blog { get; set; }
-        
-        public List<GalleryModel> Galleries { get; set; }
-    }
+        public Gallery() { }
 
-    public class GalleryModel
-    {
-        public BlogItem Blog { get; set; }
+        public int Id { get; set; }
 
-        [Required]
+        //public int AuthorId { get; set; }
+
         public string Directory { get; set; }
 
         [Required]
+        [StringLength(160)]
         public string Title { get; set; }
 
+        [StringLength(160)]
         public string Slug { get; set; }
 
-        public List<GalleryImageModel> GalleryImages { get; set; }
+        public List<GalleryImage> GalleryImages { get; set; }
+
+        [StringLength(250)]
+        public string CoverImagePath { get; set; }
     }
 
-    public class GalleryImageModel
+    public class GalleryImage
     {
+        public int Id { get; set; }
+
         public string Path { get; set; }
         
         public string Name { get; set; }

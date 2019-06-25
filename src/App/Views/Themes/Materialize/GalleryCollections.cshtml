@@ -14,17 +14,17 @@
         <div class="container">
             <div class="row">
                 <div class="col s12 m12 l12 center-align">
-                    <h4 class="font-amatic white-text">Our Photo Galleries</h4>
+                    <h4 class="font-amatic white-text">Our Collections</h4>
                 </div>
             </div>
             <div class="row">
-                @foreach (GalleryModel gallery in Model.Galleries)
+                @foreach (Gallery gallery in Model.Galleries)
                 {
                 <div class="col s12 m4 l3">
                     <a title="@gallery.Title" href="~/collections/@gallery.Slug">
-                        <div class="card card-hoverable">
+                        <div class="card card-hoverable paper">
                             <div class="card-image">
-                                <img src="~/themes/materialize/images/Jess.jpg">
+                                <img src="@gallery.CoverImagePath">
                             </div>
                         </div>
                         <div class="center-align">

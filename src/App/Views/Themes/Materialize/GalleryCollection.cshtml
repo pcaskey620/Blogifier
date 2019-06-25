@@ -1,4 +1,4 @@
-﻿@model GalleryModel
+﻿@model Gallery
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +9,7 @@
 <body class="blue-grey">
 
     <partial name="~/Views/Themes/Materialize/_Shared/_Header.cshtml" />
-
+    
     <main>
         <div class="container">
             <div class="row">
@@ -18,10 +18,10 @@
                 </div>
             </div>
             <div id="lightgallery" class="row">
-                @foreach (GalleryImageModel image in Model.GalleryImages)
+                @foreach (GalleryImage image in Model.GalleryImages)
                 {
-                    <a class="col s6 m3 l3" href="@image.Path">
-                        <img class="responsive-img" src="@image.Path" data-ng-src="@image.Path" />
+                    <a class="col s6 m3 l3 flex-item" href="@image.Path">
+                        <img class="responsive-img flex-item" src="@image.Path" data-ng-src="@image.Path" />
                     </a>
                 }
             </div>

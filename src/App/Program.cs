@@ -31,7 +31,7 @@ namespace App
                         context.Database.Migrate();
                     }
                 }
-                catch { }
+                catch (System.Exception ex) { }
 
                 // load application settings from appsettings.json
                 var app = services.GetRequiredService<IAppService<AppItem>>();
