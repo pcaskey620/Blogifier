@@ -275,8 +275,8 @@ namespace App.Controllers
         {
             try
             {
-                var directoryPath = $"{Directory.GetCurrentDirectory()}\\wwwroot\\data\\gallery\\{slug.Replace("-", " ")}";
-                var virtualPath = $"/data/gallery/{slug.Replace("-", " ")}/";
+                var directoryPath = $"{Directory.GetCurrentDirectory()}\\wwwroot\\data\\gallery\\{slug}";
+                var virtualPath = $"/data/gallery/{slug}/";
 
                 var blog = await _db.CustomFields.GetBlogSettings();
                 var images = new List<GalleryImage>();

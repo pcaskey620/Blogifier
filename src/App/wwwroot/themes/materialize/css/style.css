@@ -275,3 +275,10 @@ blockquote {
 .btn {
     background-color: #00acc1 !important
 }
+
+@media only screen and (max-width: 992px) {
+    #gallery-container {
+        width: 100%;    
+    }
+}
+
