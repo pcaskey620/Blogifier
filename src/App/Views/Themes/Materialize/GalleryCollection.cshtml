@@ -1,4 +1,4 @@
-﻿@model Gallery
+﻿@model GalleryViewModel
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,15 +14,15 @@
         <div class="container">
             <div class="row">
                 <div class="col s12 m12 l12 center-align">
-                    <h4 class="font-amatic white-text">@Model.Title</h4>
+                    <h4 class="font-amatic white-text">@Model.Gallery.Title</h4>
                 </div>
             </div>
+        </div>
+        <div class="container" style="width: 90%">
             <div id="lightgallery" class="row">
-                @foreach (GalleryImage image in Model.GalleryImages)
-                {
-                    <a class="col s6 m3 l3 flex-item" href="@image.Path">
-                        <img class="responsive-img flex-item" src="@image.Path" data-ng-src="@image.Path" />
-                    </a>
+                @foreach (GalleryImage image in Model.Gallery.GalleryImages)
+                {                  
+                    <a href="@image.Path"><img class="" src="@image.Path" data-src="@image.Path" data-ng-src="@image.Path" /></a>
                 }
             </div>
         </div>
@@ -35,7 +35,7 @@
     <script src="~/themes/materialize//plugins/lightgallary/js/lg-thumbnail.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#lightgallery").lightGallery();
+            $("#lightgallery").lightGallery({thumbnail:true});
         });
     </script>
 </body>

@@ -12,6 +12,7 @@
     }
 
     function pick(id) {
+        debugger;
         var items = $('.bf-filemanager .item-check:checked');
         if (callBack.name === 'insertImageCallback') {
             if (items.length === 0) {
@@ -56,6 +57,13 @@
     }
     function uploadSubmit() {
         var data = new FormData($('#frmUpload')[0]);
+        debugger;
+        var isGallery = false;
+        var galleryId = 0;
+        if (window.location.pathname === '/admin/gallery/edit') {
+            isGallery = true;
+            galleryId = window.location.search.replace('?id=', '');
+        }
 
         dataService.upload('assets/upload', data, submitCallback, fail);
     }
@@ -82,18 +90,35 @@
     }
 
     function load(page) {
+        
+        var isGallery = false;
+        var galleryId = 0;
+        if (window.location.pathname === '/admin/gallery/edit') {
+            isGallery = true;
+            $('#filterFileManager').hide();
+            galleryId = window.location.search.replace('?id=', '');
+        }
+
         $('#check-all').prop('checked', false);
-        var filter = $('input[name=filter]:checked').val();
-        if (!filter) {
-            filter = 'filterAll';
+
+        if (isGallery) {
+            // new gallery logic...
+            dataService.get('assets?page=' + page + '&filter=filterAll&galleryId=' + galleryId, loadCallback, fail);
+
+        } else {
+            var filter = $('input[name=filter]:checked').val();
+            if (!filter) {
+                filter = 'filterAll';
+            }
+            var search = $('#asset-search').val();
+            if (search && search.length > 0) {
+                dataService.get('assets?page=' + page + '&filter=' + filter + '&search=' + search, loadCallback, fail);
+            }
+            else {
+                dataService.get('assets?page=' + page + '&filter=' + filter, loadCallback, fail);
+            }
         }
-        var search = $('#asset-search').val();
-        if (search && search.length > 0) {
-            dataService.get('assets?page=' + page + '&filter=' + filter + '&search=' + search, loadCallback, fail);
-        }
-        else {
-            dataService.get('assets?page=' + page + '&filter=' + filter, loadCallback, fail);
-        }
+        
         return false;
     }
     function loadCallback(data) {

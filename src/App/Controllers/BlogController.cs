@@ -250,7 +250,7 @@ namespace App.Controllers
                     var gallery = new Gallery
                     {
                         Directory = dirPath,
-                        Title = directoryName,
+                        Title = directoryName.Replace("-", " "),
                         //Blog = model.Blog,
                         Slug = directoryName.Replace(" ", "-"),
                         CoverImagePath = coverImagePath
@@ -279,20 +279,10 @@ namespace App.Controllers
                 var virtualPath = $"/data/gallery/{slug.Replace("-", " ")}/";
 
                 var blog = await _db.CustomFields.GetBlogSettings();
-
-                var model = new Gallery()
-                {
-                    //Blog = blog,
-                    Directory = directoryPath,
-                    Slug = slug,
-                    Title = slug.Replace("-", " ")
-                };
-                //model.Blog = blog;
-
                 var images = new List<GalleryImage>();
 
                 var files = Directory.GetFiles(directoryPath);
-                
+
                 foreach (string file in files)
                 {
                     var image = new GalleryImage()
@@ -301,8 +291,21 @@ namespace App.Controllers
                         Path = virtualPath + Path.GetFileName(file)
                     };
                     images.Add(image);
-                }
-                model.GalleryImages = images;
+                }   
+                
+                var gallery = new Gallery()
+                {
+                    Directory = directoryPath,
+                    Slug = slug,
+                    Title = slug.Replace("-", " "),
+                    GalleryImages = images
+                };
+                
+                var model = new GalleryViewModel()
+                {
+                    Blog = blog,
+                    Gallery = gallery
+                };                               
 
                 //var viewName = $"~/Views/Themes/{model.Blog.Theme}/GalleryCollection.cshtml";
                 var viewName = $"~/Views/Themes/Materialize/GalleryCollection.cshtml";

@@ -20,9 +20,9 @@
             <div class="row">
                 @foreach (Gallery gallery in Model.Galleries)
                 {
-                <div class="col s12 m4 l3">
+                <div class="col s12 m4 l4" style="margin-top: 1em;">
                     <a title="@gallery.Title" href="~/collections/@gallery.Slug">
-                        <div class="card card-hoverable paper">
+                        <div class="card card-hoverable paper blue-grey lighten-4 gallery-card">
                             <div class="card-image">
                                 <img src="@gallery.CoverImagePath">
                             </div>

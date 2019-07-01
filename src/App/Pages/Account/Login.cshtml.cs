@@ -36,6 +36,7 @@ namespace App.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+            returnUrl = "~/admin/posts";
             if (ModelState.IsValid)
             {
                 var result = await _sm.PasswordSignInAsync(UserName, Password, RememberMe, lockoutOnFailure: false);

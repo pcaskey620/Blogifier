@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace App.Controllers
 {
@@ -37,7 +38,7 @@ namespace App.Controllers
         [HttpDelete]
         public async Task RemovePost(int id)
         {
-            
+
             var post = _db.BlogPosts.Single(p => p.Id == id);
             var author = _db.Authors.Single(a => a.Id == post.AuthorId);
             var user = _db.Authors.Single(a => a.AppUserName == User.Identity.Name);
@@ -47,7 +48,7 @@ namespace App.Controllers
             {
                 _db.BlogPosts.Remove(post);
                 _db.Complete();
-            }    
+            }
             await Task.CompletedTask;
         }
 
@@ -82,7 +83,7 @@ namespace App.Controllers
         }
 
         [Route("assets")]
-        public async Task<AssetsModel> GetAssetList(int page = 1, string filter = "", string search = "")
+        public async Task<AssetsModel> GetAssetList(int page = 1, string filter = "", string search = "", int galleryId = 0)
         {
             var pager = new Pager(page);
             var user = _um.Users.Single(u => u.UserName == User.Identity.Name);
@@ -90,7 +91,15 @@ namespace App.Controllers
 
             if (string.IsNullOrEmpty(search))
             {
-                if (filter == "filterImages")
+                if (galleryId > 0)
+                {
+                    var gallery = _db.Galleries.Single(g => g.Id == galleryId);
+
+                    var directoryFullPath = Directory.GetCurrentDirectory() + "\\wwwroot" + gallery.Directory.Replace("/", "\\");
+
+                    items = await _ss.Find(a => a.AssetType == AssetType.Image, pager, directoryFullPath);
+                }
+                else if (filter == "filterImages")
                 {
                     items = await _ss.Find(a => a.AssetType == AssetType.Image, pager);
                 }
@@ -171,6 +180,16 @@ namespace App.Controllers
             }
             return Ok("Created");
         }
+
+        [HttpPost, Route("assets/uploadgalleryitem")]
+        public async Task<IActionResult> UploadGalleryItem(ICollection<IFormFile> files)
+        {
+            foreach (var file in files)
+            {
+                await SaveFile(file);
+            }
+            return Ok("Created");
+        } 
 
         async Task SaveFile(IFormFile file)
         {

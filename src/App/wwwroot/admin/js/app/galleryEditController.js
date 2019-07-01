@@ -25,6 +25,8 @@ function openFileMgr() {
     fileManagerController.open(insertImageCallback);
 }
 
-function insertImageCallback() {
+function insertImageCallback(data) {
+    debugger;
+    var output = data + '](' + webRoot + data + ')';
 
 }
