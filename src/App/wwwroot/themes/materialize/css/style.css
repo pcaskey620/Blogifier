@@ -43,7 +43,7 @@ p {
 }
 
 .parallax-container {
-    min-height: 250px;
+    min-height: 200px;
     line-height: 0;
     /*height: auto;*/
     color: rgba(255,255,255,.9);
@@ -51,6 +51,11 @@ p {
 
 .parallax-container .section {
     width: 100%;
+}
+
+no-padding-section {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
 }
 
 @media only screen and (max-width : 992px) {
