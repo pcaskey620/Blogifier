@@ -1,4 +1,5 @@
-﻿var fileManagerController = function (dataService) {
+﻿
+var fileManagerController = function (dataService) {
     var callBack;
 
     function open(openCallback) {
@@ -56,16 +57,18 @@
         return false;
     }
     function uploadSubmit() {
-        var data = new FormData($('#frmUpload')[0]);
-        debugger;
+        var data = new FormData($('#frmUpload')[0]);       
         var isGallery = false;
         var galleryId = 0;
         if (window.location.pathname === '/admin/gallery/edit') {
             isGallery = true;
             galleryId = window.location.search.replace('?id=', '');
         }
-
-        dataService.upload('assets/upload', data, submitCallback, fail);
+        if (isGallery) {
+            dataService.upload('assets/uploadgalleryitem/' + galleryId, data, submitCallback, fail);
+        } else {
+            dataService.upload('assets/upload', data, submitCallback, fail);
+        }        
     }
     function submitCallback() {
         load(1);

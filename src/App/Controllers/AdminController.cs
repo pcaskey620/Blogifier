@@ -181,22 +181,29 @@ namespace App.Controllers
             return Ok("Created");
         }
 
-        [HttpPost, Route("assets/uploadgalleryitem")]
-        public async Task<IActionResult> UploadGalleryItem(ICollection<IFormFile> files)
+        [HttpPost, Route("assets/uploadgalleryitem/{id}")]
+        public async Task<IActionResult> UploadGalleryItem(ICollection<IFormFile> files, int id)
         {
             foreach (var file in files)
             {
-                await SaveFile(file);
+
+                var galleryPath = _db.Galleries.Single(g => g.Id == id).Directory;
+                await SaveFile(file, galleryPath);
             }
             return Ok("Created");
-        } 
+        }
 
-        async Task SaveFile(IFormFile file)
+        async Task SaveFile(IFormFile file, string galleryDirectory = "")
         {
             var user = _um.Users.Where(u => u.UserName == User.Identity.Name)
-                    .FirstOrDefault();
+                    .FirstOrDefault();            
 
             var path = string.Format("{0}/{1}", DateTime.Now.Year, DateTime.Now.Month);
+
+            if (!string.IsNullOrEmpty(galleryDirectory))
+            {
+                path = galleryDirectory;
+            }
 
             var asset = await _ss.UploadFormFile(file, Url.Content("~/"), path);
         }

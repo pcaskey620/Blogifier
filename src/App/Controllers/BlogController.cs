@@ -354,5 +354,23 @@ namespace App.Controllers
             }
         }
 
+        [Route("Videos")]
+        public async Task<IActionResult> Videos()
+        {
+            try
+            {
+                var model = new PostModel();
+                model.Blog = await _db.CustomFields.GetBlogSettings();
+
+                var viewName = $"~/Views/Themes/{model.Blog.Theme}/Videos.cshtml";
+
+                return View(viewName, model);
+            }
+            catch
+            {
+                return Redirect("~/error/404");
+            }
+        }
+
     }
 }

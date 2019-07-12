@@ -8,7 +8,7 @@
         $('#galleryList').empty();
         $.each(data, function (index) {
             var gallery = data[index];
-            var img = webRoot + "";
+            var img = gallery.directory + "/cover.jpg";
             var galleryLink = webRoot + 'admin/gallery/edit?id=' + gallery.id;
 
             var tag = '<div class="post-grid-col">' +

@@ -236,3 +236,8 @@ PublishProfiles/
 **/Logs/*
 
 package-lock.json
+src/App/app.dbBAK7
+src/App/app.dbBAK10
+src/App/app.dbBAK8
+src/App/app.dbBAK9
+src/db/app.dbBAK2
