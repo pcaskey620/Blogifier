@@ -1,10 +1,13 @@
 ﻿var galleryEditController = function (dataService) {
     function load() {
-
+        var galleryId = window.location.search.replace('?id=', '');
+        dataService.get("api/galleryedit?id=" + galleryId, loadCallback, fail);
     }
 
-    function loadCallback() {
-
+    function loadCallback(data) {
+        $.each(data, function () {
+            var galleryImage = data[index];
+        });
     }
 
     function add() {
@@ -26,7 +29,5 @@ function openFileMgr() {
 }
 
 function insertImageCallback(data) {
-    debugger;
     var output = data + '](' + webRoot + data + ')';
-
 }

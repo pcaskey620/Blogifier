@@ -75,6 +75,42 @@ namespace App.Controllers.Api
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+    }
 
+    [Route("api/[controller]")]
+    [ApiController]
+    public class GalleryEditController : Controller
+    {
+        IDataService _data;
+
+        public GalleryEditController(IDataService data)
+        {
+            _data = data;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<GalleryImage>>> Get(int id)
+        {
+            var gallery = _data.Galleries.Single(g => g.Id == id);
+
+            var directoryPath = $"{Directory.GetCurrentDirectory()}\\wwwroot\\data\\gallery\\{gallery.Slug}";
+            var virtualPath = $"/data/gallery/{gallery.Slug}/";
+
+            var images = new List<GalleryImage>();
+
+            var files = Directory.GetFiles(directoryPath);
+
+            foreach (string file in files)
+            {
+                var image = new GalleryImage()
+                {
+                    Name = Path.GetFileName(file),
+                    Path = virtualPath + Path.GetFileName(file)
+                };
+                images.Add(image);
+            }
+
+            return Ok(images);
+        }
     }
 }

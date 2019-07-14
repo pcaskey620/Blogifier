@@ -170,6 +170,11 @@ namespace Core.Services
                 Path.Combine(Location, fileName) :
                 Path.Combine(Location, path + _separator + fileName);
 
+            if (path.Contains("gallery"))
+            {
+                filePath =  Path.GetFullPath(Path.Combine(Location, @"..\..\")) + path + _separator + fileName;
+            }
+
             using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
                 await file.CopyToAsync(fileStream);
@@ -298,8 +303,18 @@ namespace Core.Services
         public void DeleteFile(string path)
         {
             path = path.Replace("/", _separator);
-            path = path.Replace($"{_uploadFolder}{_separator}{_blogSlug}{_separator}", "");
-            File.Delete(GetFullPath(path));
+            path = path.Replace($"{_uploadFolder}{_separator}{_blogSlug}{_separator}", "");            
+
+            var fullPath = GetFullPath(path);
+
+            if (fullPath.Contains("data" + _separator + "gallery" + _separator))
+            {
+                fullPath = fullPath.Replace("data" + _separator + "admin" + _separator, "");
+                fullPath = fullPath.Replace("data" + _separator + "jwil" + _separator, "");
+                fullPath = fullPath.Replace("data" + _separator + "demo" + _separator, "");
+            }
+
+            File.Delete(fullPath);
         }
 
         public async Task Reset()
