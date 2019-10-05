@@ -6,7 +6,10 @@
 
     function loadCallback(data) {
         $.each(data, function () {
+
             var galleryImage = data[index];
+
+
         });
     }
 

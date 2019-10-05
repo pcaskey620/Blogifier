@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Askmethat.Aspnet.JsonLocalizer" Version="1.1.6" />
+    <PackageReference Include="EnvDTE80" Version="8.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.1" PrivateAssets="All" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
+    <PackageReference Include="System.IO.Packaging" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
