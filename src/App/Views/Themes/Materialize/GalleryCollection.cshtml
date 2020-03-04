@@ -3,12 +3,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <partial name="~/Views/Themes/Materialize/_Shared/_Head.cshtml" />    
+    <partial name="~/Views/Themes/Materialize/_Shared/_Head.cshtml" />
 </head>
 <body class="blue-grey">
 
     <partial name="~/Views/Themes/Materialize/_Shared/_Header.cshtml" />
-    
+
     <main>
         <div class="container">
             <div class="row">
@@ -19,11 +19,37 @@
         </div>
         <div class="container" id="gallery-container">
             <div id="lightgallery" class="row">
-                @foreach (GalleryImage image in Model.Gallery.GalleryImages)
-                {                  
-                    <a href="@image.Path"><img class="" src="@image.Path" data-src="@image.Path" data-ng-src="@image.Path" /></a>
+
+                @for (int index = 0; index < Model.Gallery.GalleryImages.Count; index++)
+                {
+                    GalleryImage image = Model.Gallery.GalleryImages[index];
+                    string path = "https://aajoaihlwo.cloudimg.io/v7/https://www.parksandwils.com/" + image.Path + "?h=400&w=400&gravity=auto";
+                    string fullpath = "https://aajoaihlwo.cloudimg.io/cdno/n/n/https://www.parksandwils.com/" + image.Path;
+                    <div class="col s6 m4 l2">
+                        <a href="@fullpath" data-src="@fullpath">
+                            @if (index < 10)
+                            {
+                                <img class="responsive-img" src="@path"
+                                 
+                                     />
+                            }
+                            else
+                            {
+                                <img loading="lazy" class="responsive-img" src="@path"
+                                     data-src="@fullpath"
+                                     data-ng-src="@fullpath" />
+                            }
+                        </a>
+                    </div>
+                    @if (index > 19)
+                    {
+                        break;
+                    }
                 }
             </div>
+        </div>
+        <div class="container pt-10" style="border-top: 1px solid white;">
+            <span class="to-top-wrapper"><a href="#top" class="to-top"><i class="material-icons cyan-text text-darken-1" style="font-size: 46px;">arrow_drop_up</i></a></span>
         </div>
     </main>
 
@@ -34,7 +60,9 @@
     <script src="~/themes/materialize//plugins/lightgallary/js/lg-thumbnail.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#lightgallery").lightGallery({thumbnail:true});
+            $("#lightgallery").lightGallery({
+                thumbnail: true
+            });
         });
     </script>
 </body>

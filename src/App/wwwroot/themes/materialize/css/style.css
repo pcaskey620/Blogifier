@@ -9,10 +9,6 @@
     font-family: 'Amatic SC', cursive;
 }
 
-.font-jose {
-    font-family: 'Josefin Sans', sans-serif;
-}
-
 .font-major-mono {
     font-family: 'Major Mono Display', monospace;
 }
@@ -85,9 +81,9 @@ no-padding-section {
     padding: 0 15px;
 }
 
-    .icon-block .material-icons {
-        font-size: inherit;
-    }
+.icon-block .material-icons {
+    font-size: inherit;
+}
 
 footer.page-footer {
     margin: 0;
@@ -100,6 +96,10 @@ footer.page-footer {
     color: white;
 }
 
+#footer-copyright {
+    font-size: 12px;
+}
+
 #map {
     height: 100%;
     max-height: 250px;
@@ -109,8 +109,14 @@ footer.page-footer {
     font-size: 2.25rem;
 }
 
+@media only screen and (max-width: 600px) {
+    .sidenav {
+        width: 100%;
+    }
+}
 .sidenav li > a {
     color: white;
+    font-size: 18px;
 }
 
 blockquote {
@@ -157,14 +163,14 @@ blockquote {
 }
 
 #post-card-content {
-    margin-bottom: 0px; 
+    margin-bottom: 0px;
     padding-bottom: 0px;
 }
 
 #map {
     max-height: 350px;
     height: 100%;
-    min-height:200px;
+    min-height: 200px;
 }
 
 .footer-logo {
@@ -223,9 +229,8 @@ blockquote {
     width: 100%;
     position: absolute;
 }
-
+/*
 #lightgallery {
-    /* Prevent vertical gaps */
     line-height: 0;
     -webkit-column-count: 5;
     -webkit-column-gap: 0px;
@@ -236,10 +241,10 @@ blockquote {
 }
 
 #lightgallery img {
-    /* Just in case there are inline attributes */
     width: 100% !important;
     height: auto !important;
 }
+
 @media (max-width: 1200px) {
     #lightgallery {
         -moz-column-count: 4;
@@ -271,7 +276,7 @@ blockquote {
         column-count: 1;
     }
 }
-
+*/
 .gallery-card:hover {
     -webkit-transform: rotate(1deg); /* Safari */
     transform: rotate(1deg);
@@ -284,12 +289,229 @@ blockquote {
 #gallery-container {
     width: 90%;
 }
+
 @media only screen and (max-width: 992px) {
     #gallery-container {
-        width: 100%;    
+        width: 100%;
     }
 }
 
 strong {
     font-weight: bolder;
+    color: #00acc1;
+}
+
+#mobile-nav-search-icon {
+    float: none;
+    display: inline;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#mobile-nav-close-icon {
+    float: none;
+    display: inline;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#mobile-nav-van-icon-container {
+    position: absolute;
+    bottom: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.blog-search {
+    width: 80% !important;
+    background-color: white !important;
+}
+
+#btn-search {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    min-width: 100px;
+}
+
+/*#mobile-nav-search-section {
+    display: none;
+}*/
+
+#search-lg-container {
+    display: none;
+}
+
+#search-lg {
+    width: 200px !important;
+}
+
+#btn-search-lg {
+    margin-bottom: 5px;    
+}
+
+.pw-h5 {
+    font-size: 1.64rem;
+    line-height: 110%;
+    margin: 1.0933333333rem 0 .656rem 0;
+}
+
+a.collection-item {
+    font-size: 18pt;
+    color: #00acc1;
+    font-weight: bolder;
+}
+.winter-section {
+    border-top-color: #26a69a;
+    border-top-style: solid;
+}
+
+.text-greenish {
+    color: #26a69a !important;
+}
+
+:root {
+    --default-padding: 16px;
+    --header-height: 180px;
+}
+
+.sticky {
+    position: sticky;
+    top: 0px; /* adjust sentinel height/positioning based on this position. */
+    height: var(--header-height);
+    padding: 0 var(--default-padding);
+}
+
+.sticky_sentinel {
+    position: absolute;
+    left: 0;
+    right: 0; /* needs dimensions */
+    visibility: hidden;
+}
+
+.sticky_sentinel--top {
+    /* Adjust the height and top values based on your on your sticky top position.
+  e.g. make the height bigger and adjust the top so observeHeaders()'s
+  IntersectionObserver fires as soon as the bottom of the sentinel crosses the
+  top of the intersection container. */
+    height: 80px;
+    top: -24px;
+}
+
+.sticky_sentinel--bottom {
+    /* Height should match the top of the header when it's at the bottom of the
+  intersection container. */
+    height: calc(var(--header-height) + var(--default-padding));
+    bottom: 0;
+}
+
+#categories {
+    background-color: white;
+    padding-bottom: 10px;
+    height: 100%;
+}
+
+.wp1, .wp2, .wp3, .wp4, .wp5, .wp6, .wp7, .wp8, .wp9, .wp10, .wp11, .wp12 {
+    visibility: hidden !important;
+}
+
+.bounceInLeft, .bounceInRight, .bounceInDown, .bounceInUp, .zoomInDown,
+.fadeIn, .fadeInUp, .fadeInUpDelay, .fadeInDown, .fadeInUpD, .fadeInLeft, .fadeInRight {
+    visibility: visible !important;
+}
+
+.card .card-image .card-img-title-center {    
+    text-align: center;
+    position: absolute;
+    /*top: 50%;*/
+    left: 50%;
+    transform: translate(-50%, -100%);
+    color: black;
+    padding: 4px;
+    font-size: 16px;
+}
+
+.img-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.img-wrap .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    -moz-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    -webkit-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+
+.img-wrap i {
+    color: #fff;
+    font-size: 15px;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 6px;
+    right: 6px;
+}
+
+.img-wrap:hover img, .img-wrap:focus img, .card-image:hover img {
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.img-wrap:hover .overlay, .img-wrap:focus .overlay, .card-image:hover .overlay {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=1)";
+    filter: alpha(opacity=1);
+    opacity: 1;
+    z-index: 9;
+}
+
+.card-img-title-center {
+    text-transform: uppercase;
+    padding: 6px;
+    background-color: rgba(255,250,250,.63);
+}
+
+.card-image:hover span.card-img-title-center {
+    font-style: italic;
+}
+
+#lightgallery div.col {
+    padding: 0.55rem;
+}
+
+.to-top-wrapper {
+    font-size: 30px;
+    display: block;
+    cursor: pointer;
+    margin: -25px auto 50px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: 1px solid white;
+    background: #fff;
+}
+
+.to-top-wrapper .to-top {
+    display: block;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.to-top-wrapper .to-top:hover {
+    margin-top: -5px;
 }

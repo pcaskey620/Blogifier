@@ -24,6 +24,8 @@ namespace Core.Data
         public Pager Pager { get; set; }
 
         public PostListType PostListType { get; set; }
+
+        public IEnumerable<Gallery> Galleries { get; set; }
     }
 
     public class PostItem : IEquatable<PostItem>

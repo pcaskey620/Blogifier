@@ -31,15 +31,16 @@ namespace App.Controllers
             _viewEngine = viewEngine;
         }
 
-        public async Task<IActionResult> Index(int page = 1, string term = "")
+        [Route("blog")]
+        public async Task<IActionResult> Posts(int page = 1, string term = "")
         {
             var blog = await _db.CustomFields.GetBlogSettings();
             var pager = new Pager(page, blog.ItemsPerPage);
             IEnumerable<PostItem> posts;
-
+            
             if (string.IsNullOrEmpty(term))
             {
-                posts = await _db.BlogPosts.GetList(p => p.Published > DateTime.MinValue, pager);
+                posts = await _db.BlogPosts.GetList(p => p.Published > DateTime.MinValue, pager);                
             }
             else
             {
@@ -372,5 +373,55 @@ namespace App.Controllers
             }
         }
 
+        public async Task<IActionResult> Index()
+        {
+            try
+            {
+                var pager = new Pager(1, 10);
+                IEnumerable<PostItem> featuredPosts;
+
+                featuredPosts = await _db.BlogPosts.GetList(x => x.IsFeatured == true, pager);
+                var recentFeaturedPost = featuredPosts.OrderByDescending(i => i.Published).Take(3);
+
+                var directoryPath = Directory.GetCurrentDirectory() + "\\wwwroot\\data\\gallery";
+
+                // defaulting to first 6 directories
+                var directories = Directory.GetDirectories(directoryPath).Take(6);
+                var galleries = new List<Gallery>();
+
+                foreach (string dirPath in directories)
+                {                  
+                    string directoryName = new DirectoryInfo(dirPath).Name;
+                    string coverImagePath = $"/data/gallery/{directoryName}/cover.jpg";
+                    var gallery = new Gallery
+                    {
+                        Directory = dirPath,
+                        Title = directoryName.Replace("-", " "),
+                        //Blog = model.Blog,
+                        Slug = directoryName.Replace(" ", "-"),
+                        CoverImagePath = coverImagePath
+                    };
+
+                    galleries.Add(gallery);
+                }
+
+                var model = new ListModel
+                {
+                    PostListType = PostListType.Blog,
+                    Posts = recentFeaturedPost,
+                    Pager = pager,
+                    Galleries = galleries
+                };
+                model.Blog = await _db.CustomFields.GetBlogSettings();
+
+                var viewName = $"~/Views/Themes/{model.Blog.Theme}/Home.cshtml";
+
+                return View(viewName, model);
+            }
+            catch
+            {
+                return Redirect("~/error/404");
+            }
+        }
     }
 }

@@ -13,6 +13,31 @@
     <partial name="~/Views/Themes/Materialize/_Shared/_Header.cshtml" />
 
     <main>
+
+        @if (Model.PostListType == PostListType.Search)
+        {
+            <div class="section">
+                <div class="row container center-align">
+                    <div class="col s12 m12 l12">
+                        <div class="card hoverable">
+                            <div class="card-content">
+                                @if (Model.Posts.Count() < 1)
+                                {
+                                    <h4 class="font-shadows-into-light">No Results Found</h4>
+                                    <p class="font-raleway">Looks like we couldn't find a match on "<span id="search-term"></span>". Try another search.</p>
+                                }
+                                else
+                                {
+                                    <h4 class="font-shadows-into-light">Search Results for "<span id="search-term"></span>"</h4>
+                                    <p class="font-raleway">@Model.Posts.Count() matches found.</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }        
+
         @if (Model.Posts != null)
         {
             foreach (var item in Model.Posts)
@@ -22,7 +47,7 @@
                     <a href="~/posts/@item.Slug" title="@item.Title" class="white-text">
                         <div class="parallax-container">
                             <div class="parallax">
-                                <img class="responsive-img" src="~/@img" alt="@item.Title" />
+                                <img class="responsive-img" src="https://aajoaihlwo.cloudimg.io/cdno/n/n/https://www.parksandwils.com/@img" alt="@item.Title" />
                             </div>
                         </div>
                         <div class="section no-padding-section">
@@ -42,6 +67,7 @@
                 </div>
             }
         }
+        
         @if (pgr != null && (pgr.ShowOlder || pgr.ShowNewer))
         {
             <ul class="pagination center-align white-text">
@@ -93,6 +119,12 @@
     </main>
 
     <partial name="~/Views/Themes/Materialize/_Shared/_Footer.cshtml" />
-
+    <script>
+        (function ($) {
+            $(function () {   
+                $('#search-term').html(getParamByNameLower('term'));
+            }); // end of document ready
+        })(jQuery); // end of jQuery name space
+    </script>
 </body>
 </html>

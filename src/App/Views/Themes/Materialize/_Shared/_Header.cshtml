@@ -1,14 +1,15 @@
 ﻿<header>
-    <nav class="cyan darken-1" role="navigation">
+    <nav class="cyan darken-1 nav-extended" role="navigation">
         <div class="nav-wrapper container">
-            <a id="logo-container" href="https://www.parksandwils.com" class="brand-logo font-amatic valign-wrapper">
+            <a id="logo-container" href="https://www.parksandwils.com" title="Parks and Wils" class="brand-logo font-amatic valign-wrapper">
                 <img id="pw-logo-desktop" class="responsive-img hide-on-med-and-down" src="~/@Model.Blog.Logo" alt="@Model.Blog.Title" />
                 Parks and Wils
             </a>
             <a href="~/"><img id="pw-logo-tablet" class="responsive-img hide-on-large-only right" src="~/@Model.Blog.Logo" alt="@Model.Blog.Title" /></a>
+
             <ul class="right hide-on-med-and-down ">
                 <li>
-                    <a href="https://www.parksandwils.com" class="font-raleway" title="Home">Home</a>
+                    <a href="https://www.parksandwils.com/Blog" class="font-raleway" title="Blog">Blog</a>
                 </li>
                 <li>
                     <a href="https://www.parksandwils.com/AboutUs" class="font-raleway" title="About Us">About Us</a>
@@ -17,25 +18,25 @@
                     <a href="https://www.parksandwils.com/Van" class="font-raleway" title="Our Van">Our Van</a>
                 </li>
                 <li>
-                    <a href="https://www.parksandwils.com/Route" class="font-raleway" title="Route">Route</a>
-                </li>
-                <li>
                     <a href="https://www.parksandwils.com/Collections" class="font-raleway" title="Gallery">Gallery</a>
                 </li>
                 <li>
                     <a href="https://www.parksandwils.com/Videos" class="font-raleway" title="Videos">Videos</a>
                 </li>
+                <li>
+                    <a href="javascript: toggleLargeSearchField();"><i id="search-icon-lg" class="material-icons white-text">search</i></a>
+                </li>
             </ul>
 
             <div id="nav-mobile" class="sidenav blue-grey white-text">
-                <ul>
+                <ul class="center-align">
                     <li>
                         <a class="sidenav-close" href="#!">
-                            <i class="material-icons white-text">close</i>
+                            <i class="material-icons white-text" id="mobile-nav-close-icon">close</i>
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.parksandwils.com/" class="font-raleway" title="Home">Home</a>
+                        <a href="https://www.parksandwils.com/Blog" class="font-raleway" title="Blog">Blog</a>
                     </li>
                     <li>
                         <a href="https://www.parksandwils.com/AboutUs" class="font-raleway" title="About Us">About Us</a>
@@ -44,22 +45,29 @@
                         <a href="https://www.parksandwils.com/Van" class="font-raleway" title="Our Van">Our Van</a>
                     </li>
                     <li>
-                        <a href="https://www.parksandwils.com/Route" class="font-raleway" title="Route">Route</a>
-                    </li>
-                    <li>
                         <a href="https://www.parksandwils.com/Collections" class="font-raleway" title="Gallery">Gallery</a>
                     </li>
                     <li>
                         <a href="https://www.parksandwils.com/Videos" class="font-raleway" title="Videos">Videos</a>
                     </li>
+                    <li>
+                        <a id="mobile-nav-search-icon-a" href="javascript: toggleMobileSearchField();" title="Search"><i class="material-icons white-text" id="mobile-nav-search-icon">search</i></a>
+                    </li>
+                    <li id="mobile-nav-search-section">
+                        <input id="search" type="search" class="blog-search" autocomplete="off" required>
+                        <a id="btn-search" class="waves-effect waves-light btn-small" href="javascript: searchSiteClick();">SEARCH</a>
+                    </li>
                 </ul>
-                <div class="row">
-                    <div class="s12 m4 l8">
-                        <a href="~/"><img id="pw-logo-mobile" class="responsive-img hide-on-large-only" src="~/@Model.Blog.Logo" alt="@Model.Blog.Title" /></a>
-                    </div>
+                <div id="mobile-nav-van-icon-container">
+                    @*<a class="white-text" href="https://www.instagram.com/parks.and.wils/" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i></a>*@
+                    <a href="~/"><img id="pw-logo-mobile" class="responsive-img hide-on-large-only" src="~/@Model.Blog.Logo" alt="@Model.Blog.Title" /></a>
                 </div>
             </div>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </div>
+        <div id="search-lg-container" class="nav-content hide-on-med-and-down right-align container">
+            <input id="search-lg" type="search" class="blog-search" autocomplete="off" />
+            <a id="btn-search-lg" class="waves-effect waves-light btn-small" href="javascript: searchSiteLargeClick();">SEARCH</a>
         </div>
     </nav>
 </header>

@@ -52,6 +52,20 @@
   </ItemGroup>
  
   <ItemGroup>
+    <None Remove="app %282%29.dbBAK10" />
+    <None Remove="app.dbBAK" />
+    <None Remove="app.dbBAK10" />
+    <None Remove="app.dbBAK2" />
+    <None Remove="app.dbBAK3" />
+    <None Remove="app.dbBAK4" />
+    <None Remove="app.dbBAK5" />
+    <None Remove="app.dbBAK6" />
+    <None Remove="app.dbBAK7" />
+    <None Remove="app.dbBAK8" />
+    <None Remove="app.dbBAK9" />
+  </ItemGroup>
+ 
+  <ItemGroup>
     <Folder Include="wwwroot\themes\materialize\plugins\googefonts\" />
     <Folder Include="wwwroot\themes\materialize\plugins\materialize\" />
     <Folder Include="wwwroot\themes\materialize\plugins\fontawesome\" />

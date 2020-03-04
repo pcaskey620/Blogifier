@@ -10,9 +10,9 @@
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
-                <div class="card card-hoverable">
+                <div class="card hoverable">
                     <div class="card-image">
-                        <img class="responsive-img" src="@Model.Blog.Cover" />
+                        <img class="responsive-img" src="https://aajoaihlwo.cloudimg.io/cdno/n/n/https://www.parksandwils.com/@Model.Blog.Cover" />
                     </div>
                     <div id="post-card-content" class="card-content">
                         <div class="row">
@@ -21,7 +21,7 @@
                             </div>
                             <div class="col s12 m4 l4">
                                 <div class="chip">
-                                    <img src="~/@Model.Post.Author.Avatar" alt="@Model.Post.Author.DisplayName">
+                                    <img src="https://aajoaihlwo.cloudimg.io/cdno/n/n/https://www.parksandwils.com/@Model.Post.Author.Avatar" alt="@Model.Post.Author.DisplayName">
                                     @Model.Post.Author.DisplayName
                                 </div>
                                 <span>@Model.Post.Published.ToFriendlyDateString()</span>
@@ -65,16 +65,25 @@
     <script src="~/themes/materialize//plugins/lightgallary/js/lg-thumbnail.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#post-content img').each(function() {                
+            $('#post-content img:not(.amazon-img)').each(function () {   
+                var base = 'https://aajoaihlwo.cloudimg.io/cdn/n/n/https://www.parksandwils.com/';
                 var src = $(this).attr('src')
-                //$(this).attr('data-src', src);
-                $(this).parent().attr('data-src', src);
-                //$(this).attr('data-ng-src', src);
+                var newSrc = base + src;
+                var src = $(this).attr('src', newSrc);
+                $(this).parent().attr('data-src', newSrc);
+            });
+
+            $('#post-content img:not(.amazon-img)').each(function () {   
+                var datasrc = $(this).attr('data-src');
+                if (typeof datasrc === 'undefined'){
+                    $(this).attr('data-src', $(this).attr('src'));
+                }
             });
 
             $("#post-content").lightGallery({
                 thumbnail: false, 
                 keyPress: false,
+                selector: 'img:not(.amazon-img)',
                 controls: false, 
                 getCaptionFromTitleOrAlt: false, 
                 enableDrag: false,

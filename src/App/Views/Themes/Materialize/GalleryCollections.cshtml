@@ -18,20 +18,31 @@
                 </div>
             </div>
             <div class="row">
-                @foreach (Gallery gallery in Model.Galleries)
+                @for (int index = 0; index < Model.Galleries.Count; index++)                
                 {
-                <div class="col s12 m4 l4" style="margin-top: 1em;">
-                    <a title="@gallery.Title" href="~/collections/@gallery.Slug">
-                        <div class="card card-hoverable paper blue-grey lighten-4 gallery-card">
-                            <div class="card-image">
-                                <img src="@gallery.CoverImagePath">
+                    Gallery gallery = Model.Galleries[index];
+                    <div class="col s12 m6 l6" style="margin-top: 1em;">
+                        <a title="@gallery.Title" href="~/collections/@gallery.Slug">
+                            <div class="card">
+                                <div class="card-image">
+                                    @{ var imgPath = "https://aajoaihlwo.cloudimg.io/v7/https://www.parksandwils.com/" + gallery.CoverImagePath + "?h=360&w=640&gravity=auto"; }
+                                    <div class="img-wrap">
+                                        <div class="overlay"></div>
+                                        @if (index < 4)
+                                        {
+                                            <img src="@imgPath">
+                                        }
+                                        else
+                                        {
+                                            <img loading="lazy" src="@imgPath">
+                                        }                                        
+                                    </div>
+                                    <span class="card-title card-img-title-center font-raleway">@gallery.Title</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="center-align">
-                            <h6 class="font-shadows-into-light white-text">@gallery.Title</h6>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
+
                 }
             </div>
         </div>
