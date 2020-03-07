@@ -272,7 +272,7 @@ namespace App.Controllers
         }
 
         [Route("collections/{slug}")]
-        public async Task<IActionResult> Collection(string slug)
+        public async Task<IActionResult> Collection(string slug, int page = 1)
         {
             try
             {
@@ -280,10 +280,21 @@ namespace App.Controllers
                 var virtualPath = $"/data/gallery/{slug}/";
 
                 var blog = await _db.CustomFields.GetBlogSettings();
-                var images = new List<GalleryImage>();
 
                 var files = Directory.GetFiles(directoryPath);
+                var totalFileCount = files.Count();
 
+                var pager = new Pager(page, 12);
+                
+                var skip = pager.CurrentPage * pager.ItemsPerPage - pager.ItemsPerPage;
+                pager.Configure(totalFileCount);
+
+                if (pager.ShowOlder) pager.LinkToOlder = $"collections/{slug}?page={pager.Older}";
+                if (pager.ShowNewer) pager.LinkToNewer = $"collections/{slug}?page={pager.Newer}";
+                pager.LinkBase = $"collections/{slug}";
+
+                var images = new List<GalleryImage>();
+                
                 foreach (string file in files)
                 {
                     var image = new GalleryImage()
@@ -292,23 +303,25 @@ namespace App.Controllers
                         Path = virtualPath + Path.GetFileName(file)
                     };
                     images.Add(image);
-                }   
-                
+                }
+
+                var pageImages = images.Skip(skip).Take(pager.ItemsPerPage).ToList();
+
                 var gallery = new Gallery()
                 {
                     Directory = directoryPath,
                     Slug = slug,
                     Title = slug.Replace("-", " "),
-                    GalleryImages = images
+                    GalleryImages = pageImages
                 };
-                
+
                 var model = new GalleryViewModel()
                 {
                     Blog = blog,
-                    Gallery = gallery
+                    Gallery = gallery,
+                    Pager = pager
                 };                               
 
-                //var viewName = $"~/Views/Themes/{model.Blog.Theme}/GalleryCollection.cshtml";
                 var viewName = $"~/Views/Themes/Materialize/GalleryCollection.cshtml";
 
                 return View(viewName, model);

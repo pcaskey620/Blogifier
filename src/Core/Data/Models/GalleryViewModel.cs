@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Helpers;
 
 namespace Core.Data.Models
 {
@@ -11,6 +12,8 @@ namespace Core.Data.Models
         public Gallery Gallery { get; set; }
 
         public List<GalleryImage> Images { get; set; }
+
+        public Pager Pager { get; set; }
 
     }
 }

@@ -512,6 +512,10 @@ a.collection-item {
     transition: all .3s ease-in-out;
 }
 
-.to-top-wrapper .to-top:hover {
+.to-top:hover i {
     margin-top: -5px;
+}
+
+.pagination li.active {
+    background-color: #00acc1;
 }

@@ -1,5 +1,7 @@
 ﻿@model GalleryViewModel
-
+@{ 
+    var pgr = Model.Pager;
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <div class="col s12 m12 l12 center-align">
-                    <h4 class="font-amatic white-text">@Model.Gallery.Title</h4>
+                    <h4 class="font-raleway white-text">@Model.Gallery.Title</h4>
                 </div>
             </div>
         </div>
@@ -25,29 +27,69 @@
                     GalleryImage image = Model.Gallery.GalleryImages[index];
                     string path = "https://aajoaihlwo.cloudimg.io/v7/https://www.parksandwils.com/" + image.Path + "?h=400&w=400&gravity=auto";
                     string fullpath = "https://aajoaihlwo.cloudimg.io/cdno/n/n/https://www.parksandwils.com/" + image.Path;
-                    <div class="col s6 m4 l2">
-                        <a href="@fullpath" data-src="@fullpath">
-                            @if (index < 10)
+                    <div class="col s6 m4 l4">
+                        <a class="item" data-src="@fullpath">
+                            @if (index < 7)
                             {
-                                <img class="responsive-img" src="@path"
-                                 
-                                     />
+                                <img class="responsive-img" src="@path" />
                             }
                             else
                             {
-                                <img loading="lazy" class="responsive-img" src="@path"
-                                     data-src="@fullpath"
-                                     data-ng-src="@fullpath" />
+                                <img loading="lazy" class="responsive-img" src="@path" />
                             }
                         </a>
                     </div>
-                    @if (index > 19)
-                    {
-                        break;
-                    }
                 }
             </div>
         </div>
+        @if (pgr != null && (pgr.ShowOlder || pgr.ShowNewer))
+        {            
+            <ul class="pagination center-align white-text" style="padding-bottom: 24px;">
+                @if (pgr.ShowNewer)
+                {
+                    var pageNum = pgr.CurrentPage - 1;
+                    string linkPath = $"~/{pgr.LinkBase}?page={pageNum}";
+                    <li class="waves-effect">
+                        <a class="white-text" href="@Url.Content(linkPath)"><i class="material-icons">chevron_left</i></a>
+                    </li>
+                }
+                else
+                {
+                    <li class="disabled">
+                        <a class="" href="!#"><i class="material-icons">chevron_left</i></a>
+                    </li>
+                }
+                
+                @for (int index = 0; index < pgr.LastPage; index++)
+                {
+                    var current = index + 1;
+                    string styleClass = "waves-effect";
+                    string linkPath = $"~/{pgr.LinkBase}?page={current}";
+                    if (current == pgr.CurrentPage)
+                    {
+                        styleClass = "active";
+                    }
+                    <li class="@styleClass">
+                        <a class="white-text" href="@Url.Content(linkPath)">@current</a>
+                    </li>
+                }
+
+                @if (pgr.ShowOlder)
+                {
+                    var pageNum = pgr.CurrentPage + 1;
+                    string linkPath = $"~/{pgr.LinkBase}?page={pageNum}";
+                    <li class="waves-effect">
+                        <a class="white-text" href="Url.Content(@linkPath)"><i class="material-icons">chevron_right</i></a>
+                    </li>
+                }
+                else
+                {
+                    <li class="disabled">
+                        <a class="" href="#!"><i class="material-icons">chevron_right</i></a>
+                    </li>
+                }
+            </ul>
+        }
         <div class="container pt-10" style="border-top: 1px solid white;">
             <span class="to-top-wrapper"><a href="#top" class="to-top"><i class="material-icons cyan-text text-darken-1" style="font-size: 46px;">arrow_drop_up</i></a></span>
         </div>
@@ -61,6 +103,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#lightgallery").lightGallery({
+                selector: '.item',
                 thumbnail: true
             });
         });

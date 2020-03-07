@@ -51,5 +51,7 @@
 
         public string RouteValue { get; set; }
         public int LastPage { get; set; } = 1;
+
+        public string LinkBase { get; set; }
     }
 }
