@@ -2,6 +2,7 @@
 @{
     ViewData["bodyClass"] = "home";
     var pgr = Model.Pager;
+    bool topSectionWhite = true;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +37,7 @@
                     </div>
                 </div>
             </div>
-        }        
+        }
 
         @if (Model.Posts != null)
         {
@@ -67,7 +68,7 @@
                 </div>
             }
         }
-        
+
         @if (pgr != null && (pgr.ShowOlder || pgr.ShowNewer))
         {
             <ul class="pagination center-align white-text">
@@ -75,18 +76,24 @@
                 {
                     <li class="waves-effect" style="margin-right: 1em;">
                         <a class="white-text font-raleway" style="display: table-cell" href="~/@pgr.LinkToOlder">
-                            <i class="material-icons white-text" style="vertical-align: middle;">chevron_left</i> older</a>
+                            <i class="material-icons white-text" style="vertical-align: middle;">chevron_left</i> older
+                        </a>
                     </li>
                 }
                 @if (pgr.ShowNewer)
                 {
                     <li class="waves-effect" style="margin-left: 1em; vertical-align: middle;">
-                        <a class="white-text font-raleway" style="display: table-cell" href="~/@pgr.LinkToNewer">newer 
-                            <i class="material-icons white-text" style="vertical-align: middle;">chevron_right</i></a>
+                        <a class="white-text font-raleway" style="display: table-cell" href="~/@pgr.LinkToNewer">
+                            newer
+                            <i class="material-icons white-text" style="vertical-align: middle;">chevron_right</i>
+                        </a>
                     </li>
                 }
             </ul>
         }
+
+        <partial name="~/Views/Themes/Materialize/_Shared/_ToTopSection.cshtml" model="topSectionWhite" />
+
         <div class="section white">
             <div class="row container center-align">
                 <h5 class="font-raleway"><i class="fas fa-map-marked-alt"></i> Current Location</h5>
@@ -113,7 +120,7 @@
             }
         </script>
         <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeYeSBgvQ0laAD-8l8OgQRSnFbcHdeRpo&callback=initMap">
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALvTDDLZLsNtxTdNmHuqBjsTTooLwkA2M&callback=initMap">
         </script>
 
     </main>

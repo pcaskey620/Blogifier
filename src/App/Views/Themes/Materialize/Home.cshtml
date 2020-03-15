@@ -1,5 +1,7 @@
 ﻿@model ListModel
-
+@{  
+    bool topSectionWhite = false;
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,10 +86,11 @@
                 <div class="carousel" style="margin-top: -100px; margin-bottom: -100px;">
                     @foreach (Gallery gallery in Model.Galleries)
                     {
+                        var imgPath = "https://aajoaihlwo.cloudimg.io/v7/https://www.parksandwils.com/" + gallery.CoverImagePath + "?h=360&w=640&gravity=auto";
                         <a class="carousel-item" href="~/collections/@gallery.Slug" title="@gallery.Title">
                             <div class="card hoverable">
                                 <div class="card-image">
-                                    <img class="responsive-img" src="https://aajoaihlwo.cloudimg.io/cdn/n/n/https://www.parksandwils.com/@gallery.CoverImagePath" loading="lazy"/>
+                                    <img class="responsive-img" src="@imgPath" loading="lazy" />
                                 </div>
                                 <div class="card-content blue-grey font-raleway" style="padding-top: 6px; padding-bottom: 6px; color: white;">
                                     @gallery.Title
@@ -119,7 +122,7 @@
                 <h3 class="font-amatic"><i class="fas fa-map-marked-alt"></i> Current Location</h3>
                 <div class="col s12 m12 l8 offset-l2">
                     <div id="map" style="margin-left: auto; margin-right: auto; display: block;"></div>
-                </div>                
+                </div>
             </div>
             <div class="wp12 row container center-align">
                 <h4 class="font-amatic">Resorts Visited in 19/20 Season</h4>
@@ -139,16 +142,16 @@
                     <i class="material-icons">check</i> <a href="~/posts/steamboat-springs">Steamboat</a>
                 </div>
                 <div class="col s6 m6 l4 font-raleway">
-                    <i class="material-icons">check</i> Solitude
+                    <i class="material-icons">check</i> <a href="~/posts/utah-skiing">Solitude</a>
                 </div>
                 <div class="col s6 m6 l4 font-raleway">
-                    <i class="material-icons">check</i> Snowbird
+                    <i class="material-icons">check</i> <a href="~/posts/utah-skiing">Snowbird</a>
                 </div>
                 <div class="col s6 m6 l4 font-raleway">
-                    <i class="material-icons">check</i> Park City
+                    <i class="material-icons">check</i> <a href="~/posts/utah-skiing">Park City</a>
                 </div>
                 <div class="col s6 m6 l4 font-raleway">
-                    <i class="material-icons">check</i> Snowbasin
+                    <i class="material-icons">check</i> <a href="~/posts/utah-skiing">Snowbasin</a>
                 </div>
                 <div class="col s6 m6 l4 font-raleway">
                     <i class="material-icons">check</i> <a href="~/posts/big-sky">Big Sky</a>
@@ -158,7 +161,7 @@
                 </div>
                 <div class="col s6 m6 l4 font-raleway">
                     <i class="material-icons">check</i> <a href="~/posts/jackson-hole-teton-valley">Targhee</a>
-</div>
+                </div>
                 <div class="col s6 m6 l4 font-raleway">
                     <i class="material-icons">check</i> Stevens Pass
                 </div>
@@ -171,8 +174,18 @@
                 <div class="col s6 m6 l4 font-raleway">
                     <i class="material-icons">check</i> Whistler
                 </div>
+                <div class="col s6 m6 l4 font-raleway center-align">
+                    <i class="material-icons">check</i> Revelstoke
+                </div>
+                <div class="col s6 m6 l4 font-raleway center-align">
+                    <i class="material-icons">check</i> Sunshine
+                </div>
+            </div>
+            <div class="row" style="padding-top: 10px;">
+                <partial name="~/Views/Themes/Materialize/_Shared/_ToTopSection.cshtml" model="topSectionWhite" />
             </div>
         </div>
+
         @*<div class='embedsocial-instagram' data-ref="676bd17edb0d651df8bf1eb8e162b33dda5cce04"></div>*@
         @*<script>(function (d, s, id) { var js; if (d.getElementById(id)) { return; } js = d.createElement(s); js.id = id; js.src = "https://embedsocial.com/embedscript/in.js"; d.getElementsByTagName("head")[0].appendChild(js); }(document, "script", "EmbedSocialInstagramScript"));</script>*@
         <script>

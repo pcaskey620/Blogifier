@@ -1,6 +1,7 @@
 ﻿@model GalleryViewModel
 @{ 
     var pgr = Model.Pager;
+    bool topSectionWhite = true;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +15,12 @@
     <main>
         <div class="container">
             <div class="row">
-                <div class="col s12 m12 l12 center-align">
+                <div class="col s2 m2 l2" style="margin-top: 1.5rem;">
+                    <a href="~/collections" title="Back">
+                        <i class="material-icons" style="font-size: 32px; background-color: white; color: #00acc1;border-radius: 50%; padding: 4px;">arrow_back</i>
+                    </a>
+                </div>
+                <div class="col s8 m8 l8 center-align">
                     <h4 class="font-raleway white-text">@Model.Gallery.Title</h4>
                 </div>
             </div>
@@ -79,7 +85,7 @@
                     var pageNum = pgr.CurrentPage + 1;
                     string linkPath = $"~/{pgr.LinkBase}?page={pageNum}";
                     <li class="waves-effect">
-                        <a class="white-text" href="Url.Content(@linkPath)"><i class="material-icons">chevron_right</i></a>
+                        <a class="white-text" href="@Url.Content(linkPath)"><i class="material-icons">chevron_right</i></a>
                     </li>
                 }
                 else
@@ -90,9 +96,7 @@
                 }
             </ul>
         }
-        <div class="container pt-10" style="border-top: 1px solid white;">
-            <span class="to-top-wrapper"><a href="#top" class="to-top"><i class="material-icons cyan-text text-darken-1" style="font-size: 46px;">arrow_drop_up</i></a></span>
-        </div>
+        <partial name="~/Views/Themes/Materialize/_Shared/_ToTopSection.cshtml" model="topSectionWhite" /> 
     </main>
 
     <partial name="~/Views/Themes/Materialize/_Shared/_Footer.cshtml" />

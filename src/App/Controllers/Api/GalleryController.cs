@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.IO;
+using System.Linq;
 
 namespace App.Controllers.Api
 {
@@ -29,7 +30,7 @@ namespace App.Controllers.Api
             try
             {
                 var galleries = await _data.Galleries.GetList();
-                return Ok(galleries);
+                return Ok(galleries.ToList().OrderBy(g => g.Title));
             }
             catch (Exception ex)
             {

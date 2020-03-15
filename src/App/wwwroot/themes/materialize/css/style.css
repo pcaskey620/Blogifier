@@ -432,13 +432,13 @@ a.collection-item {
     font-size: 16px;
 }
 
-.img-wrap {
+#gallery-container .img-wrap {
     position: relative;
     overflow: hidden;
     border-radius: 4px;
 }
 
-.img-wrap .overlay {
+#gallery-container .img-wrap .overlay {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -452,30 +452,30 @@ a.collection-item {
     opacity: 0;
 }
 
-.img-wrap i {
-    color: #fff;
-    font-size: 15px;
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    top: 6px;
-    right: 6px;
-}
+    #gallery-container .img-wrap i {
+        color: #fff;
+        font-size: 15px;
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        top: 6px;
+        right: 6px;
+    }
 
-.img-wrap:hover img, .img-wrap:focus img, .card-image:hover img {
-    -moz-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    -o-transform: scale(1.1);
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
-}
+    #gallery-container .img-wrap:hover img, #gallery-container .img-wrap:focus img, #gallery-container .card-image:hover img {
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
 
-.img-wrap:hover .overlay, .img-wrap:focus .overlay, .card-image:hover .overlay {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=1)";
-    filter: alpha(opacity=1);
-    opacity: 1;
-    z-index: 9;
-}
+    #gallery-container .img-wrap:hover .overlay, #gallery-container .img-wrap:focus .overlay, #gallery-container .card-image:hover .overlay {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=1)";
+        filter: alpha(opacity=1);
+        opacity: 1;
+        z-index: 9;
+    }
 
 .card-img-title-center {
     text-transform: uppercase;
@@ -501,6 +501,18 @@ a.collection-item {
     height: 50px;
     border: 1px solid white;
     background: #fff;
+}
+
+.to-top-wrapper-alt {
+    font-size: 30px;
+    display: block;
+    cursor: pointer;
+    margin: -25px auto 50px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #00acc1;
+    background: #00acc1;
 }
 
 .to-top-wrapper .to-top {
