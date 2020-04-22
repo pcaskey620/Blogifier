@@ -531,3 +531,18 @@ a.collection-item {
 .pagination li.active {
     background-color: #00acc1;
 }
+
+.border-white {
+    border-style: solid; 
+    border-color: white;
+}
+
+#pinterest-container {
+    border-top-color: #26a69a;
+    border-top-style: solid;
+    text-align: center;
+}
+
+.text-red {
+    color: #e60023;
+}

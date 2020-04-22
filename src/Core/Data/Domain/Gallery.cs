@@ -26,6 +26,9 @@ namespace Core.Data
 
         [StringLength(250)]
         public string CoverImagePath { get; set; }
+
+        [StringLength(160)]
+        public string Season { get; set; }
     }
 
     public class GalleryImage

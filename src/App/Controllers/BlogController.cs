@@ -232,35 +232,30 @@ namespace App.Controllers
         }
 
         [Route("collections")]
-        public async Task<IActionResult> Collections()
+        public async Task<IActionResult> Collections(int page = 1, string season = "")
         {
             try
             {
                 var model = new GalleriesModel();
                 model.Blog = await _db.CustomFields.GetBlogSettings();
 
+                // Refactor to use _db.Galleries
+                var galleries = string.IsNullOrWhiteSpace(season) ? await _db.Galleries.GetList() : await _db.Galleries.GetListBySeason(season);
 
-                var directoryPath = Directory.GetCurrentDirectory() + "\\wwwroot\\data\\gallery";
-                var directories = Directory.GetDirectories(directoryPath);
-                var galleries = new List<Gallery>();
+                galleries.ToList().ForEach(g => g.CoverImagePath = $"{g.Directory}/cover.jpg");
+              
+                var pager = new Pager(page, 12);
 
-                foreach (string dirPath in directories)
-                {
-                    string directoryName = new DirectoryInfo(dirPath).Name;                   
-                    string coverImagePath = $"/data/gallery/{directoryName}/cover.jpg";
-                    var gallery = new Gallery
-                    {
-                        Directory = dirPath,
-                        Title = directoryName.Replace("-", " "),
-                        //Blog = model.Blog,
-                        Slug = directoryName.Replace(" ", "-"),
-                        CoverImagePath = coverImagePath
-                    };
+                var skip = pager.CurrentPage * pager.ItemsPerPage - pager.ItemsPerPage;
+                pager.Configure(galleries.Count());
 
-                    galleries.Add(gallery);
-                }
+                if (pager.ShowOlder) pager.LinkToOlder = $"collections?page={pager.Older}";
+                if (pager.ShowNewer) pager.LinkToNewer = $"collections?page={pager.Newer}";
+                pager.LinkBase = $"collections";
 
-                model.Galleries = galleries;
+                model.Galleries = galleries.OrderBy(g => g.Title).Skip(skip).Take(pager.ItemsPerPage).ToList();
+                model.Pager = pager;
+
                 var viewName = $"~/Views/Themes/{model.Blog.Theme}/GalleryCollections.cshtml";
 
                 return View(viewName, model);
@@ -332,7 +327,7 @@ namespace App.Controllers
             }
         }
 
-        [Route("Van")]
+        [Route("van")]
         public async Task<IActionResult> Van()
         {
             try
@@ -350,7 +345,7 @@ namespace App.Controllers
             }
         }
 
-        [Route("Route")]
+        [Route("route")]
         public async Task<IActionResult> Route()
         {
             try
@@ -368,7 +363,7 @@ namespace App.Controllers
             }
         }
 
-        [Route("Videos")]
+        [Route("videos")]
         public async Task<IActionResult> Videos()
         {
             try
@@ -436,5 +431,18 @@ namespace App.Controllers
                 return Redirect("~/error/404");
             }
         }
+
+        [Route("youtube")]
+        public void Youtube()
+        {
+            Response.Redirect("https://www.youtube.com/channel/UCvvYRmVC0_VZdsyJj0Ldapw/featured");
+        }
+
+        [Route("instagram")]
+        public void Instagram()
+        {
+            Response.Redirect("https://www.instagram.com/parks.and.wils/");
+        }
+
     }
 }

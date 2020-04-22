@@ -25,11 +25,12 @@ namespace App.Controllers.Api
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Gallery>>> Get()
+        public async Task<ActionResult<IEnumerable<Gallery>>> Get(int page = 1)
         {
             try
             {
                 var galleries = await _data.Galleries.GetList();
+
                 return Ok(galleries.ToList().OrderBy(g => g.Title));
             }
             catch (Exception ex)
@@ -43,11 +44,7 @@ namespace App.Controllers.Api
         {
             try
             {
-                var existing = _data.Galleries.Single(a => a.Title == model.Title);
-                if (existing != null)
-                {
-                    return BadRequest("Collection already exists");
-                }
+                var existing = _data.Galleries.Single(a => a.Id == model.Id);
 
                 if (!ModelState.IsValid)
                 {
@@ -56,20 +53,31 @@ namespace App.Controllers.Api
 
                 model.Slug = model.Title.Replace(" ", "-");
 
-                var directoryPath = $"/data/gallery/{model.Slug}";
-                model.Directory = directoryPath;
+                Gallery gallery = null;
+                if (existing == null)            
+                {                    
+                    var directoryPath = $"/data/gallery/{model.Slug}";
+                    model.Directory = directoryPath;
 
-                var directoryFullPath = Directory.GetCurrentDirectory() + $"\\wwwroot\\data\\gallery\\{model.Slug}";
+                    var directoryFullPath = Directory.GetCurrentDirectory() + $"\\wwwroot\\data\\gallery\\{model.Slug}";
 
-                if (!Directory.Exists(directoryFullPath))
+                    if (!Directory.Exists(directoryFullPath))
+                    {
+                        Directory.CreateDirectory(directoryFullPath);
+                    }
+
+                    await _data.Galleries.SaveItem(model);
+                    gallery = _data.Galleries.Single(a => a.Title == model.Title);
+
+                    return Created($"/api/gallery/{model.Title}", gallery);
+                }    
+                else
                 {
-                    Directory.CreateDirectory(directoryFullPath);
-                }
-                
-                // add gallery to app database 
-                await _data.Galleries.SaveItem(model);
-                var created = _data.Galleries.Single(a => a.Title == model.Title);
-                return Created($"/api/gallery/{model.Title}", created);
+                    await _data.Galleries.SaveItem(model);
+                    gallery = _data.Galleries.Single(a => a.Id == model.Id);
+
+                    return Accepted($"/api/gallery/{model.Title}", gallery);
+                }                
             }
             catch (Exception ex)
             {
@@ -90,12 +98,12 @@ namespace App.Controllers.Api
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GalleryImage>>> Get(int id)
+        public async Task<ActionResult<GalleryViewModel>> Get(int id, int page = 1)
         {
             var gallery = _data.Galleries.Single(g => g.Id == id);
 
-            var directoryPath = $"{Directory.GetCurrentDirectory()}\\wwwroot\\data\\gallery\\{gallery.Slug}";
-            var virtualPath = $"/data/gallery/{gallery.Slug}/";
+            var directoryPath = $"{Directory.GetCurrentDirectory()}\\wwwroot\\{gallery.Directory}";
+            var virtualPath = $"{gallery.Directory}/";
 
             var images = new List<GalleryImage>();
 
@@ -111,7 +119,36 @@ namespace App.Controllers.Api
                 images.Add(image);
             }
 
-            return Ok(images);
+            var pager = new Pager(page, 12);
+
+            var skip = pager.CurrentPage * pager.ItemsPerPage - pager.ItemsPerPage;
+            pager.Configure(images.Count());
+
+            if (pager.ShowOlder) pager.LinkToOlder = $"collections?page={pager.Older}";
+            if (pager.ShowNewer) pager.LinkToNewer = $"collections?page={pager.Newer}";
+            pager.LinkBase = $"collections";
+
+            var modelImages = images.Skip(skip).Take(pager.ItemsPerPage).ToList();
+
+            //var blog = await _db.CustomFields.GetBlogSettings();
+
+            var model = new GalleryViewModel()
+            {
+                Gallery = gallery,
+                Images = modelImages,
+                Pager = pager
+
+            };
+
+            return Ok(model);
+        }
+
+        [HttpGet("ID/{id}", Name = "GetL")]
+        public async Task<ActionResult<Gallery>> GetGalleryDetails(int id)
+        {
+            var gallery = _data.Galleries.Single(g => g.Id == id);
+
+            return Ok(gallery);
         }
     }
 }

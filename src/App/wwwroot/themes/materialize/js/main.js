@@ -7,9 +7,11 @@
         hookupWayPoints();
 
         addScrollableLinks();
-        if (window.location.href == "https://www.parksandwils.com/posts/winter-vanlife-essentials") {
+        if (window.location.href == "https://www.parksandwils.com/posts/winter-vanlife-essentials"
+            || window.location.href == "https://www.parksandwils.com/posts/summer-vanlife-essentials") {
             hookupStickyNav();
-        }         
+        } 
+        
     }); // end of document ready
 })(jQuery); // end of jQuery name space
 

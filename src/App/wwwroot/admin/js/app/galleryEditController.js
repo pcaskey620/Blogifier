@@ -1,13 +1,15 @@
 ﻿var galleryEditController = function (dataService) {
     function load() {
         var galleryId = window.location.search.replace('?id=', '');
-        dataService.get("api/galleryedit?id=" + galleryId, loadCallback, fail);
+
+        dataService.get("api/galleryedit?id=" + galleryId + "&page=1", loadCallback, fail);
     }
 
     function loadCallback(data) {
         $('#galleryImageList').empty();
-        $.each(data, function (index) {            
-            var galleryImage = data[index];
+        var images = data.images;
+        $.each(images, function (index) {            
+            var galleryImage = images[index];
             var img = galleryImage.path;
 
             var tag = '<div class="post-grid-col">' +

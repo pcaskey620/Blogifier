@@ -48,8 +48,18 @@
                                 <label class="form-group-label">Title</label>
                                 <input type="text" id="txtTitle" name="txtTitle" value="" class="form-control" required autofocus />
                             </div>
+                            <div class="form-group">
+                                <label class="form-group-label">Category</label>
+                                <select id="drpCategory" name="drpCategory" class="form-control" required>
+                                    <option value="">Please select...</option>
+                                    <option value="Summer">Summer</option>
+                                    <option value="Winter">Winter</option>
+                                </select>
+                            </div>
+                            <input type="hidden" id="hiddenGalleryId" />
                         </div>
-                        <button type="button" onclick="return galleryController.add();" class="btn btn-primary btn-main">Save</button>
+                        <button type="button" id="btnAddGallery" class="btn btn-primary btn-main">Save</button>
+                        <button type="button" id="btnEditGallery" class="btn btn-primary btn-main">Save</button>
                     </form>
                 </div>
             </div>
@@ -62,18 +72,7 @@
     <script src="~/admin/js/lib/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/admin/js/app/galleryController.js"></script>
     <script>
-        var openAddCollection = function () {
-            $('#frmCollection').validate().resetForm();
-            $('#dlgCollection').modal();
-            return false;
-        }
-    $('#frmCollection').validate({
-        rules: {
-            txtTitle: {
-                required: true
-            }
-        }
-    });
+    
     galleryController.load(1);
     </script>
 }
