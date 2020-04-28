@@ -1,0 +1,25 @@
+﻿@model Core.Data.Pinterest
+@if (Model != null && Model.Images != null)
+{
+    <section id="pinterest-container" class="text-center">
+        <h4 class="font-shadows-into-light">
+            Pin For Later
+            <a class="" target="_blank" href="@Model.PinUrl">
+                <i class="fab fa-pinterest text-red" aria-hidden="true"></i>
+            </a>
+        </h4>
+        @foreach (var pinImage in Model.Images)
+                {
+                    var img = pinImage.ImageUrl;
+                    var imgPath = $"https://aajoaihlwo.cloudimg.io/cdn/n/n/https://www.parksandwils.com/{img}";
+                    <div class="row">
+                        <div class="col s12 m6 l6 offset-m3 offset-l3">
+                            <a target="_blank" title="Pin for later" href="@Model.PinUrl">
+                                <img loading="lazy" src="@imgPath" class="img-responsive" data-src="@imgPath" />
+                            </a>
+                        </div>
+                    </div>
+                }
+        
+    </section>
+}

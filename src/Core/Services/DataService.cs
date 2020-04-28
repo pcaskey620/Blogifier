@@ -13,6 +13,7 @@ namespace Core.Services
         INewsletterRepository Newsletters { get; }
 
         IGalleryRepository Galleries { get; }
+        IPinterestRepository Pinterests { get; }
 
         int Complete();
     }
@@ -32,6 +33,7 @@ namespace Core.Services
             CustomFields = new CustomFieldRepository(_db);
             Newsletters = new NewsletterRepository(_db);
             Galleries = new GalleryRepository(_db);
+            Pinterests = new PinterestRepository(_db);
         }
 
         public IPostRepository BlogPosts { get; private set; }
@@ -42,6 +44,7 @@ namespace Core.Services
         public INewsletterRepository Newsletters { get; private set; }
 
         public IGalleryRepository Galleries { get; private set; }
+        public IPinterestRepository Pinterests { get; private set; }
 
         public int Complete()
         {

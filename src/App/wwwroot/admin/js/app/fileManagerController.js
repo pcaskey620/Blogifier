@@ -276,3 +276,9 @@ var updatePostCoverCallback = function (data) {
     $('#hdnPostImg').val(data.url);
     toastr.success('Updated');
 };
+
+var updatePinterestImagesCallback = function (data) {
+    $('.bf-editor-header').css('background-image', 'url(' + webRoot + data.url + ')');
+    $('#hdnPostImg').val(data.url);
+    toastr.succes('Pinterest Images Callback!');
+};

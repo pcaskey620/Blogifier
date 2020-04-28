@@ -546,3 +546,9 @@ a.collection-item {
 .text-red {
     color: #e60023;
 }
+
+.img-responsive {
+    display: block;
+    height: auto;
+    width: 100%;
+}

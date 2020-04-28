@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Core.Data;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Data
@@ -17,6 +18,9 @@ namespace Core.Data
         public DbSet<Newsletter> Newsletters { get; set; }
 
         public DbSet<Gallery> Gallery { get; set; }
+        public DbSet<Pinterest> Pinterests { get; set; }
+
+        public DbSet<PinterestImage> PinterestImages { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

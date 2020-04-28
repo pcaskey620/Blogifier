@@ -34,6 +34,7 @@
                     <div id="post-content" class="card-content font-raleway">
                         @Html.Raw(Model.Post.Content)
                     </div>
+                    @await Component.InvokeAsync("Pinterest", new { theme = "materialize", widget = "Pinterest", postModelId = Model.Post.Id });
                     <div class="card-content">
                         <div id="disqus_thread"></div>
                         <script>
