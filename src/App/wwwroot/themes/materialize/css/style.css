@@ -21,6 +21,8 @@
     font-family: 'Raleway', sans-serif, cursive;
 }
 
+
+
 /* Custom Stylesheet */
 /**
  * Use this file to override Materialize files so you can update
@@ -34,9 +36,9 @@ nav .brand-logo {
     color: #444;
 }*/
 
-p {
+/*p {
     line-height: 2rem;
-}
+}*/
 
 .parallax-container {
     min-height: 200px;
@@ -54,6 +56,10 @@ no-padding-section {
     padding-bottom: 0px !important;
 }
 
+p {
+    font-size: 22px;
+}
+
 @media only screen and (max-width : 992px) {
     .parallax-container .section {
         position: absolute;
@@ -63,11 +69,17 @@ no-padding-section {
     #index-banner .section {
         top: 10%;
     }
+    p {
+        font-size: 20px;
+    }
 }
 
 @media only screen and (max-width: 600px) {
     .parallax-container {
         height: 150px;
+    }
+    p {
+        font-size: 16px;
     }
 }
 
@@ -282,8 +294,21 @@ blockquote {
     transform: rotate(1deg);
 }
 
-.btn {
+.btn, .btn-small, .btn-large {
     background-color: #00acc1 !important
+}
+
+.btn-small {
+    height: 26px;
+    line-height: 26px;
+    font-size: 12px;
+    width: 100%;
+}
+
+.btn-active {
+    border-color: white;
+    border: solid;
+    border-width: thin;
 }
 
 #gallery-container {
@@ -348,7 +373,9 @@ strong {
 }
 
 #btn-search-lg {
-    margin-bottom: 5px;    
+    margin-bottom: 5px;
+    width: auto;
+    background-color: #424242;
 }
 
 .pw-h5 {
@@ -378,7 +405,7 @@ a.collection-item {
 
 .sticky {
     position: sticky;
-    top: 0px; /* adjust sentinel height/positioning based on this position. */
+    top: 64px; /* adjust sentinel height/positioning based on this position. */
     height: var(--header-height);
     padding: 0 var(--default-padding);
 }
@@ -412,7 +439,7 @@ a.collection-item {
     height: 100%;
 }
 
-.wp1, .wp2, .wp3, .wp4, .wp5, .wp6, .wp7, .wp8, .wp9, .wp10, .wp11, .wp12 {
+.wp1, .wp2, .wp3, .wp4, .wp5, .wp6, .wp7, .wp8, .wp9, .wp10, .wp11, .wp12, .wp13, .wp14, .wp15, .wp16 {
     visibility: hidden !important;
 }
 
@@ -551,4 +578,36 @@ a.collection-item {
     display: block;
     height: auto;
     width: 100%;
+}
+
+.card-height {
+    height: 22rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 600px) {
+    .card-height {
+        height: auto;
+    }
+}
+#post-content a,#post-content a:hover,#post-content a:visited {
+    color: #26a69a;
+}
+.radio-list {
+    color: #26a69a;
+    font-size: 1rem;
+}
+
+.radio-header {
+    font-style: italic;
+    color: #607d8b;
+}
+@media only screen and (min-width: 993px) {
+    .container {
+        width: 85%;
+    }
+}
+.pt-1 {
+    padding-top: 1rem !important;
 }

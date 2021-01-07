@@ -21,7 +21,7 @@ namespace App.Controllers
         IFeedService _ss;
         SignInManager<AppUser> _sm;
         private readonly ICompositeViewEngine _viewEngine;
-        static readonly string _listView = "~/Views/Themes/{0}/ListParallax.cshtml";
+        static readonly string _listView = "~/Views/Themes/{0}/List.cshtml";
 
         public BlogController(IDataService db, IFeedService ss, SignInManager<AppUser> sm, ICompositeViewEngine viewEngine)
         {
@@ -137,7 +137,7 @@ namespace App.Controllers
 
             model.Blog = blog;
             model.Blog.Cover = $"{Url.Content("~/")}{model.Blog.Cover}";
-
+            model.Category = name;
             ViewBag.Category = name;
             model.Blog.Description = "";
 
@@ -445,6 +445,33 @@ namespace App.Controllers
         {
             Response.Redirect("https://www.instagram.com/parks.and.wils/");
         }
+
+        //[Route("categories")]
+        //public async Task<IActionResult> Categories(int page = 1)
+        //{
+        //    var blog = await _db.CustomFields.GetBlogSettings();
+        //    var pager = new Pager(page, blog.ItemsPerPage);
+            
+        //    //var posts = await _db.BlogPosts.GetListByCategory(name, pager);
+
+        //    //if (pager.ShowOlder) pager.LinkToOlder = $"categories/{name}?page={pager.Older}";
+        //    //if (pager.ShowNewer) pager.LinkToNewer = $"categories/{name}?page={pager.Newer}";
+
+        //    //var model = new ListModel
+        //    //{
+        //    //    PostListType = PostListType.Category,
+        //    //    Posts = posts,
+        //    //    Pager = pager
+        //    //};
+
+        //    model.Blog = blog;
+        //    model.Blog.Cover = $"{Url.Content("~/")}{model.Blog.Cover}";
+
+        //    //ViewBag.Category = name;
+        //    model.Blog.Description = "";
+
+        //    return View(string.Format(_listView, model.Blog.Theme), model);
+        //}
 
     }
 }

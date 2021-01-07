@@ -10,7 +10,7 @@
 <body class="blue-grey">
 
     <partial name="~/Views/Themes/Materialize/_Shared/_Header.cshtml" />
-    
+
     <main>
 
         <div class="parallax-container">
@@ -173,10 +173,15 @@
             <div class="row" style="padding-top: 10px;">
                 <partial name="~/Views/Themes/Materialize/_Shared/_ToTopSection.cshtml" model="topSectionWhite" />
             </div>
-        </div>        
+        </div>
     </main>
 
     <partial name="~/Views/Themes/Materialize/_Shared/_Footer.cshtml" />
-
+    <script type="text/javascript">
+        $(document).ready(function () {
+            hookupWayPoints();
+           
+        });
+    </script>
 </body>
 </html>

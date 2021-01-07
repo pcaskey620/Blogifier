@@ -1,7 +1,8 @@
 ﻿@model ListModel
 @{
-    ViewData["bodyClass"] = "home";
-    var pgr = Model.Pager;
+        ViewData["bodyClass"] = "home";
+        var pgr = Model.Pager;
+        bool topSectionWhite = false;        
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -13,76 +14,164 @@
     <partial name="~/Views/Themes/Materialize/_Shared/_Header.cshtml" />
 
     <main>
-
-        @*Featured Section*@
-
+        @if (Model.PostListType == PostListType.Search)
+        {
+            <div class="section">
+                <div class="row container center-align">
+                    <div class="col s12 m12 l12">
+                        <div class="card hoverable">
+                            <div class="card-content">
+                                @if (Model.Posts.Count() < 1)
+                                {
+                                    <h4 class="font-shadows-into-light">No Results Found</h4>
+                                    <p class="font-raleway">Looks like we couldn't find a match on "<span id="search-term"></span>". Try another search.</p>
+                                }
+                                else
+                                {
+                                    <h4 class="font-shadows-into-light">Search Results for "<span id="search-term"></span>"</h4>
+                                    <p class="font-raleway">@Model.Posts.Count() matches found.</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (Model.PostListType == PostListType.Blog)
+        {
+            <div class="container animated fadeInUp">
+                <div class="parallax-container" style="box-shadow: 25px 25px 50px 0 #607d8b inset, -25px -25px 50px 0 #607d8b inset ">
+                    <div class="parallax">
+                        <img class="responsive-img" src="https://aajoaihlwo.cloudimg.io/cdno/n/n/https://www.parksandwils.com/data/admin/2020/5/north-america-map-blue-wide.png" alt="North America" />
+                        @*<img class="responsive-img" src="https://aajoaihlwo.cloudimg.io/cdno/n/n/https://www.parksandwils.com/data/admin/2020/5/north-america-map-blue.png" alt="North America" />*@
+                    </div>
+                    <h3 class="center-align font-shadows-into-light white-text animated fadeInUp" style="margin-top: 20%">TRAVEL BLOG</h3>
+                </div>
+            </div>
+        }
+        else if (Model.PostListType == PostListType.Category)
+        {            
+            <h3 class="center-align font-shadows-into-light white-text animated fadeInUp" style="text-transform: uppercase;">@Model.Category</h3>
+        }
         <div class="container">
             <div class="row">
-                <div class="col s12 m12 l12">
-                    @if (Model.Posts != null)
+                @if (Model.Posts != null)
+                {
+                    var index = 0;
+                    foreach (var post in Model.Posts)
                     {
-                        foreach (var item in Model.Posts)
-                        {
-                            var img = string.IsNullOrWhiteSpace(item.Cover) ? Model.Blog.Cover : item.Cover;
-                    <article class="card hoverable">
-                        <div class="card-image">
-                            <img src="~/@img" alt="@item.Title">
-                            @*<span class="card-title font-shadows-into-light">@item.Title</span>*@
-                        </div>
-                        <div class="card-content">
-                            <div class="row">
-                                <div class="col s12 m6 l6">
-                                    <span class="card-title font-shadows-into-light">@item.Title</span>
-                                </div>
-                                <div class="col s12 m6 l6">
-                                    <div class="chip">
-                                        <img src="~/@item.Author.Avatar" alt="@item.Author.DisplayName">
-                                        @item.Author.DisplayName
+                        index++;
+                        var img = "https://aajoaihlwo.cloudimg.io/v7/https://www.parksandwils.com/";
+                        img += string.IsNullOrWhiteSpace(post.Cover) ? Model.Blog.Cover : post.Cover;
+                        img += "?h=360&w=640&gravity=auto";
+                        var waypoint = "wp" + index.ToString();
+                        <div class="@waypoint col s12 m6 l4">
+                            <a href="~/posts/@post.Slug" title="@post.Title" style="color: black;">
+                                <div class="card hoverable card-height">
+                                    <div class="card-image">
+                                        <img class="responsive-img" alt="@post.Title" src="@img" />
                                     </div>
-                                    <span>@item.Published.ToFriendlyDateString()</span>
+                                    <div class="card-content font-raleway center-align">
+                                        @post.Description
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="font-raleway">
-                                @Html.Raw(Markdig.Markdown.ToHtml(item.Description))
-                            </div>
+                            </a>
                         </div>
-                        <div class="card-action">
-                            <a href="~/posts/@item.Slug" class="waves-effect waves-light btn"> Read </a>
-                        </div>
-                    </article>
-                        }
                     }
-                </div>
-
-                @*<aside class="col s12 m4 l4">
-                    <div class="card hoverable">
-                        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/Bx0N2LuAiCV/" data-instgrm-version="12" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/p/Bx0N2LuAiCV/" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;"> View this post on Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div></a> <p style=" margin:8px 0 0 0; padding:0 4px;"> <a href="https://www.instagram.com/p/Bx0N2LuAiCV/" style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;" target="_blank">Parker said he wouldn&#39;t make the drive back to Tennessee again, but last week we drove our van out to one of our favorite places in Tennessee. Blog post to come about our campsites along the way and information about the additions to our build out! 🚐 #campervan #campervanconversion #vanlife #optoutside #tennessee #centerhilllake #chl #daveandmattvans #dmvans #vanlifemeans #lifeintheslowlane #slowwideturns #wheelestate #sunset #lakedays</a></p> <p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">A post shared by <a href="https://www.instagram.com/parks.and.wils/" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px;" target="_blank"> Parks.and.Wils</a> (parks.and.wils) on <time style=" font-family:Arial,sans-serif; font-size:14px; line-height:17px;" datetime="2019-05-23T18:56:04+00:00">May 23, 2019 at 11:56am PDT</time></p></div></blockquote>
-                        <script async src="//www.instagram.com/embed.js"></script>
-                    </div>
-                </aside>
-                <aside class="col s12 m4 l4">
-                    <div class="card hoverable">
-                        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/BxIav8jFZWJ/" data-instgrm-version="12" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/p/BxIav8jFZWJ/" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;"> View this post on Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div></a> <p style=" margin:8px 0 0 0; padding:0 4px;"> <a href="https://www.instagram.com/p/BxIav8jFZWJ/" style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;" target="_blank">Well she&#39;s back ladies and gentlemen! We haven&#39;t posted in awhile because she started having some engine troubles on our third trip to the mountains. Huge bummer, but we were thankful that it happened on a weekend trip in Colorado and not in the middle of the Yukon territory. We&#39;re back on the road though and it&#39;s getting real! T- 30 days until we&#39;re on the road full time 👊🏻🚐 #vanlife #promaster #campervan #optoutside #coloRADo #milehigh #colorfulcolorado #mountainsarecalling #pinkskies #vanlife #slowwideturns #lifeintheslowlane #wheelestate #salsacycles #daveandmattvans</a></p> <p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">A post shared by <a href="https://www.instagram.com/parks.and.wils/" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px;" target="_blank"> Parks.and.Wils</a> (parks.and.wils) on <time style=" font-family:Arial,sans-serif; font-size:14px; line-height:17px;" datetime="2019-05-06T18:42:13+00:00">May 6, 2019 at 11:42am PDT</time></p></div></blockquote>
-                        <script async src="//www.instagram.com/embed.js"></script>
-                    </div>
-                </aside>*@
-
-                @*<div id="map"></div>
-        <script>
-            var map;
-            function initMap() {
-                map = new google.maps.Map(document.getElementById('map'), {
-                    center: { lat: -34.397, lng: 150.644 },
-                    zoom: 8
-                });
-            }
-        </script>*@
+                }
             </div>
+        </div>
+
+        @if (pgr != null && (pgr.ShowOlder || pgr.ShowNewer))
+        {
+            <ul class="pagination center-align white-text">
+                @if (pgr.ShowOlder)
+                {
+                    <li class="waves-effect" style="margin-right: 1em;">
+                        <a class="white-text font-raleway" style="display: table-cell" href="~/@pgr.LinkToOlder">
+                            <i class="material-icons white-text" style="vertical-align: middle;">chevron_left</i> older
+                        </a>
+                    </li>
+                }
+                @if (pgr.ShowNewer)
+                {
+                    <li class="waves-effect" style="margin-left: 1em; vertical-align: middle;">
+                        <a class="white-text font-raleway" style="display: table-cell" href="~/@pgr.LinkToNewer">
+                            newer
+                            <i class="material-icons white-text" style="vertical-align: middle;">chevron_right</i>
+                        </a>
+                    </li>
+                }
+            </ul>
+        }
+
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12 center-align">
+                <span class="center-align white-text font-shadows-into-light">EXPLORE</span>
             </div>
+            <div class="col s6 m4 l2 center-align pt-1">
+                <a class="waves-effect waves-light btn-small font-raleway" id="alaska" title="Alaska" href="~/categories/alaska">Alaska</a>
+            </div>
+            <div class="col s6 m4 l2 center-align pt-1">
+                <a class="waves-effect waves-light btn-small font-raleway" id="canada" title="Canada" href="~/categories/canada">Canada</a>
+            </div>
+            <div class="col s6 m4 l2 center-align pt-1">
+                <a class="waves-effect waves-light btn-small font-raleway" id="national-parks" title="National Parks" href="~/categories/national%20parks">National Parks</a>
+            </div>
+            <div class="col s6 m4 l2 center-align pt-1">
+                <a class="waves-effect waves-light btn-small font-raleway" id="pnw" title="Pacific North West" href="~/categories/pnw">PNW</a>
+            </div>
+            <div class="col s6 m4 l2 center-align pt-1">
+                <a class="waves-effect waves-light btn-small font-raleway" id="vanlife" title="Vanlife" href="~/categories/vanlife">Vanlife</a>
+            </div>
+            <div class="col s6 m4 l2 center-align pt-1">
+                <a class="waves-effect waves-light btn-small font-raleway" id="winter-vanlife" title="Winter Vanlife" href="~/categories/winter%20vanlife">Winter Vanlife</a>
+            </div>
+        </div>
+        @if (Model.PostListType == PostListType.Category || Model.PostListType == PostListType.Search)
+        {
+            <div class="row center-align">
+                <a class="waves-effect waves-light btn font-raleway" title="All Post" href="/Blog">View All Posts</a>
+            </div>
+        }
+    </div> 
+
+        <partial name="~/Views/Themes/Materialize/_Shared/_ToTopSection.cshtml" model="topSectionWhite" />
 
     </main>
 
     <partial name="~/Views/Themes/Materialize/_Shared/_Footer.cshtml" />
 
+    <script>
+        $(document).ready(function () {
+            hookupListWaypoints();
+            
+            if (window.location.href.includes('categories')) {                
+                var category = window.location.href.replace('https://www.parksandwils.com/categories/', '');
+                switch (category) {
+                    case "alaska":
+                        $('#alaska').addClass('btn-active');
+                        break;
+                    case "canada":
+                        $('#canada').addClass('btn-active');
+                        break;
+                    case "national parks":
+                        $('#national-parks').addClass('btn-active');
+                        break;
+                    case "pnw":
+                        $('#pnw').addClass('btn-active');
+                        break;
+                    case "vanlife":
+                        $('#vanlife').addClass('btn-active');
+                        break;
+                    case "winter vanlife":
+                        $('#winter-vanlife').addClass('btn-active');
+                        break;
+                }
+            }
+            $('#search-term').html(getParamByNameLower('term'));
+        });
+    </script>
 </body>
 </html>

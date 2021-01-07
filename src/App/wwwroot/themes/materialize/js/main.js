@@ -4,11 +4,18 @@
         $('.sidenav').sidenav();
         $('.parallax').parallax();
 
-        hookupWayPoints();
+        //hookupWayPoints();
+
+        if (typeof hookupStickyNavFlag == 'undefined') {
+            var hookupStickyNavFlag = false;
+        }
 
         addScrollableLinks();
         if (window.location.href == "https://www.parksandwils.com/posts/winter-vanlife-essentials"
-            || window.location.href == "https://www.parksandwils.com/posts/summer-vanlife-essentials") {
+            || window.location.href == "https://www.parksandwils.com/posts/summer-vanlife-essentials"
+            || window.location.href == "https://www.parksandwils.com/posts/adventure-gear"
+            || window.location.href == "https://www.parksandwils.com/posts/backpacking-essentials"
+            || hookupStickyNavFlag  ) {
             hookupStickyNav();
         } 
         
@@ -86,27 +93,27 @@ function addScrollableLinks() {
 
 function hookupWayPoints() {
     $('.wp1').waypoint(function () {
-        $('.wp1').addClass('animated fadeInUp');
+        $('.wp1').addClass('animated fadeIn');
     }, {
             offset: '75%'
         });
     $('.wp2').waypoint(function () {
-        $('.wp2').addClass('animated fadeInLeft');
+        $('.wp2').addClass('animated fadeInUp');
     }, {
             offset: '75%'
         });
     $('.wp3').waypoint(function () {
-        $('.wp3').addClass('animated fadeInRight');
+        $('.wp3').addClass('animated fadeInUp');
     }, {
             offset: '75%'
         });
     $('.wp4').waypoint(function () {
-        $('.wp4').addClass('animated fadeInLeft');
+        $('.wp4').addClass('animated fadeInUp');
     }, {
             offset: '75%'
         });
     $('.wp5').waypoint(function () {
-        $('.wp5').addClass('animated fadeInRight');
+        $('.wp5').addClass('animated fadeInUp');
     }, {
             offset: '75%'
         });
@@ -126,12 +133,12 @@ function hookupWayPoints() {
             offset: '75%'
         });
     $('.wp9').waypoint(function () {
-        $('.wp9').addClass('animated fadeIn');
+        $('.wp9').addClass('animated fadeInLeft');
     }, {
             offset: '75%'
         });
     $('.wp10').waypoint(function () {
-        $('.wp10').addClass('animated fadeInUp');
+        $('.wp10').addClass('animated fadeInRight');
     }, {
             offset: '75%'
     });
@@ -141,12 +148,75 @@ function hookupWayPoints() {
             offset: '75%'
     });
     $('.wp12').waypoint(function () {
-        $('.wp12').addClass('animated zoomInDown');
+        $('.wp12').addClass('animated fadeInUp');
     }, {
             offset: '75%'
-        });
-
+    });
+    $('.wp13').waypoint(function () {
+        $('.wp13').addClass('animated fadeInUp');
+    }, {
+        offset: '75%'
+    });
+    $('.wp14').waypoint(function () {
+        $('.wp14').addClass('animated zoomInDown');
+    }, {
+        offset: '75%'
+    });
+    $('.wp15').waypoint(function () {
+        $('.wp15').addClass('animated zoomInDown');
+    }, {
+        offset: '75%'
+    });
+    //zoomInDown
 };
+
+function hookupListWaypoints() {
+    $('.wp1').waypoint(function () {
+        $('.wp1').addClass('animated fadeInUp');
+    }, {
+        offset: '75%'
+    });
+    $('.wp2').waypoint(function () {
+        $('.wp2').addClass('animated fadeInUp');
+    }, {
+        offset: '75%'
+    });
+    $('.wp3').waypoint(function () {
+        $('.wp3').addClass('animated fadeInUp');
+    }, {
+        offset: '75%'
+    });
+    $('.wp4').waypoint(function () {
+        $('.wp4').addClass('animated fadeInUp');
+    }, {
+        offset: '75%'
+    });
+    $('.wp5').waypoint(function () {
+        $('.wp5').addClass('animated fadeInUp');
+    }, {
+        offset: '75%'
+    });
+    $('.wp6').waypoint(function () {
+        $('.wp6').addClass('animated fadeInUp');
+    }, {
+        offset: '75%'
+    });
+    $('.wp7').waypoint(function () {
+        $('.wp7').addClass('animated fadeInUp');
+    }, {
+        offset: '75%'
+    });
+    $('.wp8').waypoint(function () {
+        $('.wp8').addClass('animated fadeInUp');
+    }, {
+        offset: '75%'
+    });
+    $('.wp9').waypoint(function () {
+        $('.wp9').addClass('animated fadeInUp');
+    }, {
+        offset: '75%'
+    });
+}
 
 function hookupStickyNav() {
     if (!IntersectionObserver) {

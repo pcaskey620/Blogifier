@@ -24,7 +24,7 @@
 
             var tag = '<div class="post-grid-col">' +
                 '	<div class="post-grid-item">' +
-                '		<a href="' + galleryLink + '" class="item-link" style="background-image:url(' + img + ');"><div class="item-title mt-auto">&nbsp;</div></a>' +
+                '		<a href="' + galleryLink + '" class="item-link" style="background-image:url(https://aajoaihlwo.cloudimg.io/v7/https://www.parksandwils.com' + img + '?h=360&w=640&gravity=auto);"><div class="item-title mt-auto">&nbsp;</div></a>' +
                 '		<div class="item-info d-flex align-items-center">' +
                 '			<span class="item-date mr-auto">' + gallery.title + '</span>' +
                 '			<a id="gallery-' + gallery.id + '" href="javascript: galleryController.openEditGallery(&quot;' + gallery.id + '&quot;);" class="btn-unstyled item-favorite ml-3" data-tooltip="" title="" data-original-title="profile">' +
