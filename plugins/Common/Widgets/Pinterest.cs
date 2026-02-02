@@ -25,7 +25,7 @@ namespace Common.Widgets
             var pinterest = await _db.Pinterests.GetItem(p => p.BlogPostId == postModelId);
                    
             //string urlParam = HttpUtility.UrlEncode($"https://www.parksandwils.com/posts/{slug}");
-            //string mediaParam = HttpUtility.UrlEncode("https://aajoaihlwo.cloudimg.io/cdno/n/n/https://www.parksandwils.com/" + "/data/admin/2020/4/dave-and-matt-vans-pinterest.png");
+            //string mediaParam = HttpUtility.UrlEncode("https://www.parksandwils.com/" + "/data/admin/2020/4/dave-and-matt-vans-pinterest.png");
             //string descriptionParam = ""; // slug.Replace("-", " ");
 
             //var builder = new UriBuilder("https://www.pinterest.com/pin/create/button");

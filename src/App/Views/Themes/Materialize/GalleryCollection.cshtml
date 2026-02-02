@@ -31,8 +31,8 @@
                 @for (int index = 0; index < Model.Gallery.GalleryImages.Count; index++)
                 {
                     GalleryImage image = Model.Gallery.GalleryImages[index];
-                    string path = "https://aajoaihlwo.cloudimg.io/v7/https://www.parksandwils.com/" + image.Path + "?h=400&w=400&gravity=auto";
-                    string fullpath = "https://aajoaihlwo.cloudimg.io/cdno/n/n/https://www.parksandwils.com/" + image.Path;
+                    string path = "https://www.parksandwils.com/" + image.Path + "?h=400&w=400&gravity=auto";
+                    string fullpath = "https://www.parksandwils.com/" + image.Path;
                     <div class="col s6 m4 l4">
                         <a class="item" data-src="@fullpath">
                             @if (index < 7)

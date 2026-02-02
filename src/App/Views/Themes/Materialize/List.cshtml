@@ -42,8 +42,8 @@
             <div class="container animated fadeInUp">
                 <div class="parallax-container" style="box-shadow: 25px 25px 50px 0 #607d8b inset, -25px -25px 50px 0 #607d8b inset ">
                     <div class="parallax">
-                        <img class="responsive-img" src="https://aajoaihlwo.cloudimg.io/cdno/n/n/https://www.parksandwils.com/data/admin/2020/5/north-america-map-blue-wide.png" alt="North America" />
-                        @*<img class="responsive-img" src="https://aajoaihlwo.cloudimg.io/cdno/n/n/https://www.parksandwils.com/data/admin/2020/5/north-america-map-blue.png" alt="North America" />*@
+                        <img class="responsive-img" src="https://www.parksandwils.com/data/admin/2020/5/north-america-map-blue-wide.png" alt="North America" />
+                        @*<img class="responsive-img" src="https://www.parksandwils.com/data/admin/2020/5/north-america-map-blue.png" alt="North America" />*@
                     </div>
                     <h3 class="center-align font-shadows-into-light white-text animated fadeInUp" style="margin-top: 20%">TRAVEL BLOG</h3>
                 </div>
@@ -61,7 +61,7 @@
                     foreach (var post in Model.Posts)
                     {
                         index++;
-                        var img = "https://aajoaihlwo.cloudimg.io/v7/https://www.parksandwils.com/";
+                        var img = "https://www.parksandwils.com/";
                         img += string.IsNullOrWhiteSpace(post.Cover) ? Model.Blog.Cover : post.Cover;
                         img += "?h=360&w=640&gravity=auto";
                         var waypoint = "wp" + index.ToString();

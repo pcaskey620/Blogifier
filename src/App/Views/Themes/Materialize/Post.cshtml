@@ -15,7 +15,7 @@
             <div class="col s12 m12 l12">
                 <div class="card hoverable">
                     <div class="card-image">
-                        <img class="responsive-img" src="https://aajoaihlwo.cloudimg.io/cdno/n/n/https://www.parksandwils.com/@Model.Blog.Cover" />
+                        <img class="responsive-img" src="https://www.parksandwils.com/@Model.Blog.Cover" />
                     </div>
                     <div id="post-card-content" class="card-content">
                         <div class="row">
@@ -24,7 +24,7 @@
                             </div>
                             <div class="col s12 m4 l4">
                                 <div class="chip">
-                                    <img src="https://aajoaihlwo.cloudimg.io/cdno/n/n/https://www.parksandwils.com/@Model.Post.Author.Avatar" alt="@Model.Post.Author.DisplayName">
+                                    <img src="https://www.parksandwils.com/@Model.Post.Author.Avatar" alt="@Model.Post.Author.DisplayName">
                                     @Model.Post.Author.DisplayName
                                 </div>
                                 <span>@Model.Post.Published.ToFriendlyDateString()</span>
@@ -73,7 +73,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#post-content img:not(.amazon-img)').each(function () {   
-                var base = 'https://aajoaihlwo.cloudimg.io/cdn/n/n/https://www.parksandwils.com/';
+                var base = 'https://www.parksandwils.com/';
                 var src = $(this).attr('src')
                 var newSrc = base + src;
                 var src = $(this).attr('src', newSrc);
